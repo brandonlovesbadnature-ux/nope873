@@ -1,3 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>nope</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #7c3aed, #2e1065 70%);
+  color: white;
+}
+
+/* TITLE */
+h1 {
+  text-align: center;
+  padding: 30px;
+  font-size: 44px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  padding: 40px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* BOX */
+.box {
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+}
+
+.box:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255,255,255,0.15);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+
+.title { font-size: 18px; }
+.desc { font-size: 13px; opacity: 0.7; }
+
+/* SPARKLES */
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  animation: float 12s linear infinite;
+}
+
+@keyframes float {
+  from { transform: translateY(100vh); opacity: 0; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* DISCLAIMER */
+#disclaimer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.disclaimer-box {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div id="disclaimer">
+  <div class="disclaimer-box">
+    <h2>Notice</h2>
+    <p>Not intended for school use. Use at your own responsibility.</p>
+    <button onclick="acceptDisclaimer()">I Understand</button>
+  </div>
+</div>
+
+<h1>nope</h1>
+
+<script>
+for (let i = 0; i < 30; i++) {
+  let s = document.createElement("div");
+  s.className = "sparkle";
+  s.style.left = Math.random() * 100 + "vw";
+  s.style.animationDuration = (8 + Math.random() * 10) + "s";
+  document.body.appendChild(s);
+}
+</script>
+
+<div class="grid">
+
+  <div class="box" onclick="openRotating('truffled')"><div class="title">Truffled</div></div>
+  <div class="box" onclick="openRotating('sdxp')"><div class="title">SDXP</div></div>
+  <div class="box" onclick="openRotating('fern')"><div class="title">Fern</div></div>
+  <div class="box" onclick="openRotating('ghostlink')"><div class="title">Ghostlink</div></div>
+  <div class="box" onclick="openRotating('apollo')"><div class="title">Apollo</div></div>
+  <div class="box" onclick="openRotating('utopia')"><div class="title">Utopia</div></div>
+  <div class="box" onclick="openRotating('overcloaked')"><div class="title">Overcloaked</div></div>
+  <div class="box" onclick="openRotating('doge')"><div class="title">Doge UB</div></div>
+  <div class="box" onclick="openRotating('hydra')"><div class="title">Hydra</div></div>
+  <div class="box" onclick="openRotating('vapor')"><div class="title">Vapor</div></div>
+  <div class="box" onclick="openRotating('lunar')"><div class="title">Lunar</div></div>
+
+</div>
+
+<script>
+function acceptDisclaimer() {
+  document.getElementById("disclaimer").style.display = "none";
+}
+
 const links = {
   truffled: [
     "https://newyork-newspaperprinter.socialistsushi.com/",
@@ -44,3 +176,41 @@ const links = {
   vapor: ["https://example.com"],
   lunar: ["https://example.com"]
 };
+let indexTracker = {};
+
+function openRotating(key) {
+  if (!indexTracker[key]) indexTracker[key] = 0;
+
+  let url = links[key][indexTracker[key]];
+  indexTracker[key] = (indexTracker[key] + 1) % links[key].length;
+
+  openBlank(url);
+}
+
+function openBlank(url) {
+  let tab = window.open("about:blank", "_blank");
+
+  tab.document.write(`
+    <html>
+    <head>
+      <title>Google</title>
+      <link rel="icon" href="https://www.google.com/favicon.ico">
+      <style>
+        body { margin:0; background:black; }
+        iframe {
+          width:100%;
+          height:100%;
+          border:none;
+        }
+      </style>
+    </head>
+    <body>
+      <iframe src="${url}"></iframe>
+    </body>
+    </html>
+  `);
+}
+</script>
+
+</body>
+</html>
