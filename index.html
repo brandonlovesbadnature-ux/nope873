@@ -13,13 +13,10 @@ body {
   overflow-x: hidden;
 }
 
-/* TITLE */
 h1 {
   text-align: center;
   padding: 30px;
   font-size: 44px;
-  letter-spacing: 2px;
-  font-weight: 600;
 }
 
 /* GRID */
@@ -32,69 +29,27 @@ h1 {
   margin: auto;
 }
 
-/* GLASS CARD */
+/* BOX */
 .box {
   position: relative;
   padding: 30px;
   border-radius: 20px;
   text-align: center;
   cursor: pointer;
-
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
-
   border: 1px solid rgba(255,255,255,0.15);
-
-  transition: all 0.4s cubic-bezier(.25,.8,.25,1);
+  transition: all 0.4s ease;
 }
 
-/* GLOSS EFFECT */
-.box::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.25),
-    transparent
-  );
-  transform: skewX(-20deg);
-  opacity: 0;
-}
-
-/* HOVER MAGIC */
 .box:hover {
   transform: translateY(-10px) scale(1.05);
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.4),
-    0 0 30px rgba(124,58,237,0.6);
-  background: rgba(255,255,255,0.12);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4),
+              0 0 30px rgba(124,58,237,0.6);
 }
 
-.box:hover::before {
-  animation: shine 0.8s forwards;
-}
-
-@keyframes shine {
-  from { left: -60%; opacity: 0; }
-  50% { opacity: 1; }
-  to { left: 120%; opacity: 0; }
-}
-
-.title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.desc {
-  font-size: 14px;
-  opacity: 0.7;
-}
+.title { font-size: 20px; }
+.desc { font-size: 14px; opacity: 0.7; }
 
 /* SPARKLES */
 .sparkle {
@@ -103,7 +58,6 @@ h1 {
   height: 4px;
   background: rgba(255,255,255,0.5);
   border-radius: 50%;
-  filter: blur(1px);
   animation: float 12s linear infinite;
 }
 
@@ -112,10 +66,49 @@ h1 {
   20% { opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
 }
+
+/* DISCLAIMER */
+#disclaimer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.disclaimer-box {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+}
 </style>
 </head>
 
 <body>
+
+<!-- DISCLAIMER -->
+<div id="disclaimer">
+  <div class="disclaimer-box">
+    <h2>Notice</h2>
+    <p>This site is not intended for school use. Use at your own responsibility.</p>
+    <button onclick="acceptDisclaimer()">I Understand</button>
+  </div>
+</div>
 
 <h1>nope</h1>
 
@@ -126,7 +119,6 @@ for (let i = 0; i < 35; i++) {
   s.className = "sparkle";
   s.style.left = Math.random() * 100 + "vw";
   s.style.animationDuration = (8 + Math.random() * 10) + "s";
-  s.style.opacity = Math.random();
   document.body.appendChild(s);
 }
 </script>
@@ -134,22 +126,69 @@ for (let i = 0; i < 35; i++) {
 <!-- GRID -->
 <div class="grid">
 
-  <div class="box" onclick="window.open('desmoscalculator.onrender.com')">
+  <div class="box" onclick="openBlank('https://desmoscalculator.onrender.com')">
+    <div class="title">Desmos</div>
+    <div class="desc">Calculator</div>
+  </div>
+
+  <div class="box" onclick="openBlank('https://example.com')">
     <div class="title">Apollo</div>
     <div class="desc">Main app</div>
   </div>
 
-  <div class="box" onclick="window.open('https://example.org')">
-    <div class="title">Games</div>
-    <div class="desc">Play stuff</div>
-  </div>
-
-  <div class="box" onclick="window.open('https://example.net')">
-    <div class="title">Tools</div>
-    <div class="desc">Useful sites</div>
-  </div>
-
 </div>
+
+<script>
+function acceptDisclaimer() {
+  document.getElementById("disclaimer").style.display = "none";
+}
+
+function openBlank(url) {
+  let tab = window.open("about:blank", "_blank");
+
+  tab.document.write(`
+    <html>
+    <head>
+      <title>Google</title>
+      <link rel="icon" href="https://www.google.com/favicon.ico">
+      <style>
+        body { margin:0; background:black; }
+        .loader {
+          position:absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%,-50%);
+          color:white;
+          font-family:sans-serif;
+        }
+        iframe {
+          width:100%;
+          height:100%;
+          border:none;
+          display:none;
+        }
+      </style>
+    </head>
+    <body>
+
+      <div class="loader">Loading...</div>
+      <iframe id="frame" src="${url}"></iframe>
+
+      <script>
+        const frame = document.getElementById("frame");
+        const loader = document.querySelector(".loader");
+
+        frame.onload = () => {
+          loader.style.display = "none";
+          frame.style.display = "block";
+        };
+      <\/script>
+
+    </body>
+    </html>
+  `);
+}
+</script>
 
 </body>
 </html>
