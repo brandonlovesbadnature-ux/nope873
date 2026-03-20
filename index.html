@@ -1,88 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>nope</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4c1d95, #7c3aed);
-      color: white;
-      margin: 0;
-      padding: 20px;
-    }
+<meta charset="UTF-8">
+<title>nope</title>
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 40px;
-      letter-spacing: 2px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #4c1d95, #7c3aed);
+  overflow: hidden;
+  color: white;
+}
 
-    h2 {
-      margin-top: 40px;
-    }
+h1 {
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+  font-size: 40px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-    }
+.dots span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 50%;
+  animation: float 20s linear infinite;
+}
 
-    .box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      transition: 0.2s;
-      backdrop-filter: blur(10px);
-    }
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-10vh); }
+}
 
-    .box:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.2);
-    }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
 
-    a {
-      text-decoration: none;
-      color: white;
-      display: block;
-    }
+.box {
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.35s cubic-bezier(.25,.8,.25,1);
+}
 
-    .title {
-      font-size: 18px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
+.box:hover {
+  transform: translateY(-10px) scale(1.07);
+  background: rgba(255,255,255,0.2);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
 
-    .desc {
-      font-size: 14px;
-      color: #e0e0ff;
-    }
-  </style>
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: none;
+  flex-direction: column;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+iframe {
+  flex: 1;
+  border: none;
+}
+
+.topbar {
+  background: #111;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeBtn {
+  background: red;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.appName {
+  font-size: 14px;
+  opacity: 0.7;
+}
+</style>
 </head>
+
 <body>
 
-  <h1>nope</h1>
+<h1>nope</h1>
 
-  <h2>Unblockers</h2>
-  <div class="grid">
+<!-- DOTS -->
+<div class="dots">
+  <span style="left:10%; animation-duration:18s;"></span>
+  <span style="left:25%; animation-duration:22s;"></span>
+  <span style="left:40%; animation-duration:25s;"></span>
+  <span style="left:60%; animation-duration:19s;"></span>
+  <span style="left:80%; animation-duration:23s;"></span>
+</div>
 
-    <a href="desmoscalculator.onrender.com" target="_blank">
-      <div class="box">
-        <div class="title">Apollo</div>
-        <div class="desc">Do anything</div>
-      </div>
-    </a>
+<div class="grid">
 
-    <a href="ixl-ypu8.onrender.com" target="_blank">
-      <div class="box">
-        <div class="title">Apollo</div>
-        <div class="desc">Do Anything</div>
-      </div>
-    </a>
-
+  <div class="box" onclick="openApp('desmoscalculator.onrender.com', 'Apollo')">
+    <div class="title">Apollo</div>
   </div>
+
+  <div class="box" onclick="openApp('crazygames.com', 'Games')">
+    <div class="title">Games</div>
+  </div>
+
+  <div class="box" onclick="openApp('https://www.myinstants.com/en/categories/sound%20effects/us/', 'Soundboard')">
+    <div class="title">Tools</div>
+  </div>
+
+</div>
+
+<!-- FULLSCREEN VIEW -->
+<div class="viewer" id="viewer">
+  <div class="topbar">
+    <div class="appName" id="appName">Loading...</div>
+    <button class="closeBtn" onclick="closeApp()">Close</button>
+  </div>
+  <iframe id="frame"></iframe>
+</div>
+
+<script>
+function openApp(url, name) {
+  document.getElementById("viewer").style.display = "flex";
+  document.getElementById("frame").src = url;
+  document.getElementById("appName").innerText = name;
+}
+
+function closeApp() {
+  document.getElementById("viewer").style.display = "none";
+  document.getElementById("frame").src = "";
+}
+</script>
 
 </body>
 </html>
