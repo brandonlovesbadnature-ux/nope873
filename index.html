@@ -1,122 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>nope</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root {
-  --purple1:#a855f7;
-  --purple2:#7c3aed;
-  --accent:#c084fc;
-  --bg1:#0a0014;
-  --bg2:#1a0033;
-  --glass:rgba(168,85,247,.08);
-  --border:rgba(168,85,247,.25);
+:root{
+--p1:#a855f7;
+--p2:#7c3aed;
+--p3:#c084fc;
+--bg:#0a0014;
+--glass:rgba(168,85,247,.08);
+--border:rgba(168,85,247,.25);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui;}
-
 body{
 height:100vh;
-overflow:hidden;
-background:radial-gradient(circle at top,var(--bg1),#000);
+background:radial-gradient(circle at top,#0a0014,#000);
 color:#f5f3ff;
+overflow:hidden;
 }
 
-canvas{position:fixed;inset:0;z-index:0;}
-
-.wrapper{
-position:relative;
-z-index:2;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-}
-
+/* layout */
+.wrapper{display:flex;align-items:center;justify-content:center;height:100vh;}
 .card{
-width:860px;
-max-width:100%;
+width:850px;
 padding:28px;
-border-radius:30px;
+border-radius:28px;
 background:
-radial-gradient(circle at 0% 0%,rgba(168,85,247,.35),transparent 55%),
-radial-gradient(circle at 100% 0%,rgba(192,132,252,.22),transparent 55%),
-linear-gradient(145deg,rgba(20,0,40,.95),rgba(40,0,80,.9));
+radial-gradient(circle at 0% 0%,rgba(168,85,247,.35),transparent),
+linear-gradient(145deg,#140028,#2a0050);
 border:1px solid var(--border);
 backdrop-filter:blur(25px);
 box-shadow:0 40px 120px rgba(0,0,0,.8);
 }
 
-.header-panel{
-border-radius:20px;
-padding:14px 18px;
-margin-bottom:20px;
-background:linear-gradient(135deg,rgba(255,255,255,.15),rgba(255,255,255,.04));
-border:1px solid rgba(255,255,255,.2);
-backdrop-filter:blur(25px);
-}
-
+/* header */
 h1{
-font-size:2.3rem;
+font-size:2.2rem;
 background:linear-gradient(90deg,#fff,#c4b5fd,#a855f7);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
+.subtitle{font-size:.7rem;color:#c4b5fd;letter-spacing:.2em}
 
-.subtitle{
-font-size:.75rem;
-letter-spacing:.2em;
-text-transform:uppercase;
-color:#c4b5fd;
-}
-
-.tabs{display:flex;gap:8px;margin-bottom:16px;}
-
+/* tabs */
+.tabs{display:flex;gap:8px;margin:18px 0}
 .tab{
 flex:1;
 padding:8px;
 border-radius:999px;
 background:#140028;
 border:1px solid var(--border);
-cursor:pointer;
 text-align:center;
+cursor:pointer;
 font-size:.75rem;
-letter-spacing:.12em;
-transition:.2s;
 }
-
 .tab.active{
-background:linear-gradient(135deg,var(--purple1),var(--purple2));
-box-shadow:0 10px 30px rgba(168,85,247,.6);
+background:linear-gradient(135deg,var(--p1),var(--p2));
 }
 
+/* sections */
 .section{display:none;}
 .section.active{display:block;}
 
+/* buttons */
 .btn{
 width:100%;
 padding:12px;
-margin-bottom:10px;
+margin:8px 0;
 border-radius:14px;
 border:1px solid var(--border);
-background:
-radial-gradient(circle at 0% 0%,rgba(168,85,247,.5),transparent 55%),
-radial-gradient(circle at 100% 0%,rgba(192,132,252,.4),transparent 55%),
-linear-gradient(145deg,#1a0033,#3b0764);
+background:linear-gradient(145deg,#1a0033,#3b0764);
 color:#fff;
 cursor:pointer;
 transition:.2s;
 }
+.btn:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(168,85,247,.7);}
 
-.btn:hover{
-transform:translateY(-2px);
-box-shadow:0 15px 40px rgba(168,85,247,.7);
-}
-
+/* inputs */
 input{
 width:100%;
 padding:10px;
@@ -125,190 +89,107 @@ border:1px solid var(--border);
 background:#140028;
 color:#fff;
 }
+.input-group{display:flex;gap:10px;margin-top:10px}
 
-.input-group{display:flex;gap:10px;margin-top:14px;}
+/* footer */
+.small{margin-top:10px;font-size:.7rem;text-align:right;opacity:.6}
 
-.small{
-margin-top:14px;
-font-size:.7rem;
-text-align:right;
-opacity:.6;
-}
-
-.small span{
-background:linear-gradient(90deg,var(--purple1),var(--accent));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-/* cursor trail */
+/* trail */
 .trail{
-position:fixed;
-width:6px;height:6px;
-border-radius:50%;
-background:#c084fc;
-pointer-events:none;
-opacity:.8;
-animation:fade .4s forwards;
+position:fixed;width:6px;height:6px;border-radius:50%;
+background:#c084fc;pointer-events:none;
+animation:f .4s forwards;
 }
-@keyframes fade{to{opacity:0;transform:scale(.3);}}
-
-/* responsive */
-@media(max-width:640px){
-.card{padding:20px;}
-h1{font-size:1.8rem;}
-}
+@keyframes f{to{opacity:0;transform:scale(.3)}}
 </style>
 </head>
 
 <body>
-<canvas id="bg"></canvas>
 
 <div class="wrapper">
 <div class="card">
-<div class="header-panel">
+
 <h1>nope</h1>
 <div class="subtitle">Pr0xy launcher</div>
-</div>
 
 <div class="tabs">
-<div class="tab active" onclick="switchTab('home',this)">Home</div>
-<div class="tab" onclick="switchTab('misc',this)">Misc</div>
-<div class="tab" onclick="switchTab('settings',this)">Settings</div>
+<div class="tab active" onclick="tab('home',this)">Home</div>
+<div class="tab" onclick="tab('settings',this)">Settings</div>
 </div>
 
+<!-- HOME -->
 <div id="home" class="section active">
 <button class="btn" onclick="openBlank('https://truffled.onrender.com')">Truffled</button>
 <button class="btn" onclick="openBlank('https://sdxp.onrender.com')">SDXP</button>
 <button class="btn" onclick="openBlank('https://fern.onrender.com')">Fern</button>
-<button class="btn" onclick="openBlank('https://ghostlink.onrender.com')">Ghostlink</button>
-<button class="btn" onclick="openBlank('https://apollo.onrender.com')">Apollo</button>
-
-<div class="input-group">
-<input id="url" placeholder="https://example.com">
-<button class="btn" onclick="openCustom()">Open</button>
-</div>
 </div>
 
-<div id="misc" class="section">
-<input id="panicUrl" placeholder="Panic URL">
-<button class="btn" style="margin-top:10px" onclick="savePanic()">Save Panic</button>
-</div>
-
+<!-- SETTINGS -->
 <div id="settings" class="section">
-<button class="btn" onclick="applyCloak()">Apply Cloak</button>
+
+<input id="url" placeholder="Enter URL to open in about:blank">
+<button class="btn" onclick="openCustom()">Open in about:blank</button>
+
+<br><br>
+
+<input id="panicUrl" placeholder="Set panic redirect URL">
+<button class="btn" onclick="savePanic()">Save Panic</button>
+
+<br><br>
+
+<button class="btn" onclick="cloak()">Apply Cloak (Google)</button>
+
+<div class="small">panic key: <b>`</b></div>
+
 </div>
 
-<div class="small">made by <span>nope</span></div>
+<div class="small">made by nope</div>
+
 </div>
 </div>
 
 <script>
-function switchTab(id,el){
+/* tabs */
+function tab(id,el){
 document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
 document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 el.classList.add('active');
 document.getElementById(id).classList.add('active');
 }
 
-/* ☕ COFFEE LOADER */
+/* ☕ about:blank loader */
 function openBlank(url){
 const w=window.open('about:blank','_blank');
 if(!w)return;
 
-const html=`
+w.document.write(`
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-body{
-margin:0;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-background:#0a0014;
-color:#fff;
-font-family:sans-serif;
-}
+<body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0014;color:white;font-family:sans-serif;">
 
-/* mug */
-.mug{
-width:90px;height:70px;
-background:linear-gradient(#a855f7,#7c3aed);
-border-radius:0 0 20px 20px;
-position:relative;
-box-shadow:0 0 30px rgba(168,85,247,.6);
-}
-.mug:after{
-content:"";
-position:absolute;
-right:-20px;top:10px;
-width:20px;height:30px;
-border:4px solid #c084fc;
-border-left:none;
-border-radius:0 12px 12px 0;
-}
-
-/* steam */
-.steam span{
-position:absolute;
-width:8px;height:25px;
-background:linear-gradient(#fff,transparent);
-top:-20px;border-radius:50%;
-animation:s 2s infinite;
-}
-.steam span:nth-child(1){left:20px;}
-.steam span:nth-child(2){left:40px;animation-delay:.4s;}
-.steam span:nth-child(3){left:60px;animation-delay:.8s;}
-
-@keyframes s{
-0%{opacity:.6;transform:translateY(0);}
-100%{opacity:0;transform:translateY(-25px) scale(1.4);}
-}
-
-.label{
-position:absolute;
-margin-top:120px;
-font-size:11px;
-letter-spacing:.15em;
-color:#c4b5fd;
-text-align:center;
-width:200px;
-}
-
-iframe{
-position:absolute;
-inset:0;
-width:100%;
-height:100%;
-border:none;
-}
-</style>
-</head>
-
-<body>
-<div id="loader">
-<div class="mug"></div>
-<div class="steam">
-<span></span><span></span><span></span>
+<div id="l">
+<div style="width:90px;height:70px;background:linear-gradient(#a855f7,#7c3aed);border-radius:0 0 20px 20px;position:relative;box-shadow:0 0 30px rgba(168,85,247,.6)">
 </div>
-<div class="label">Loading Portal using Cafe ☕</div>
+
+<div style="position:absolute;margin-top:110px;font-size:11px;letter-spacing:.15em;color:#c4b5fd">
+Loading Portal using Cafe ☕
+</div>
 </div>
 
 <script>
 const f=document.createElement('iframe');
-f.src=${JSON.stringify(url)};
-f.onload=()=>document.getElementById('loader').style.display='none';
+f.src="${url}";
+f.style="position:absolute;inset:0;width:100%;height:100%;border:none;";
+f.onload=()=>document.getElementById('l').style.display='none';
 document.body.appendChild(f);
 <\/script>
-</body>
-</html>`;
 
-w.document.write(html);
+</body>
+</html>
+`);
 }
 
-/* other functions */
+/* custom url */
 function openCustom(){
 let url=document.getElementById('url').value.trim();
 if(!url)return;
@@ -316,6 +197,7 @@ if(!/^https?:\\/\\//i.test(url))url='https://'+url;
 openBlank(url);
 }
 
+/* panic */
 let panic=localStorage.getItem('panic')||'https://google.com';
 function savePanic(){
 const v=document.getElementById('panicUrl').value.trim();
@@ -326,7 +208,17 @@ document.addEventListener('keydown',e=>{
 if(e.key==='`')location.href=panic;
 });
 
-function applyCloak(){document.title='Google';}
+/* cloak */
+function cloak(){
+document.title='Google';
+let link=document.querySelector("link[rel='icon']");
+if(!link){
+link=document.createElement('link');
+link.rel='icon';
+document.head.appendChild(link);
+}
+link.href='https://www.google.com/favicon.ico';
+}
 
 /* cursor trail */
 document.addEventListener('mousemove',e=>{
@@ -337,36 +229,7 @@ d.style.top=e.clientY+'px';
 document.body.appendChild(d);
 setTimeout(()=>d.remove(),400);
 });
-
-/* particles */
-const c=document.getElementById('bg');
-const x=c.getContext('2d');
-
-function r(){c.width=innerWidth;c.height=innerHeight;}
-r();window.onresize=r;
-
-const balls=Array.from({length:70},()=>({
-x:Math.random()*c.width,
-y:Math.random()*c.height,
-r:Math.random()*3+1,
-dx:(Math.random()-.5),
-dy:(Math.random()-.5)
-}));
-
-(function a(){
-x.clearRect(0,0,c.width,c.height);
-balls.forEach(b=>{
-b.x+=b.dx;b.y+=b.dy;
-if(b.x<0||b.x>c.width)b.dx*=-1;
-if(b.y<0||b.y>c.height)b.dy*=-1;
-x.beginPath();
-x.arc(b.x,b.y,b.r,0,Math.PI*2);
-x.fillStyle='rgba(168,85,247,.7)';
-x.fill();
-});
-requestAnimationFrame(a);
-})();
 </script>
-<script src="app.js"></script>
+
 </body>
 </html>
