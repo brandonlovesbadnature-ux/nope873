@@ -3,26 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <title>nope</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-<link rel="icon" href="np.ico" sizes="any">
-<link rel="shortcut icon" href="np.ico">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:sans-serif;}
+
 body{
-  margin:0;
-  background:#111827;
+  height:100vh;
+  background: radial-gradient(circle at top, #7c3aed, #020617 70%);
+  overflow:hidden;
   color:white;
-  font-family:'Inter',sans-serif;
+}
+
+canvas{
+  position:fixed;
+  top:0;left:0;
+  z-index:0;
+}
+
+.container{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+}
+
+.card{
+  width:420px;
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.05);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  text-align:center;
+}
+
+h1{
+  margin-bottom:20px;
+  font-size:32px;
+  color:#c4b5fd;
+}
+
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.tab{
+  flex:1;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  background:rgba(255,255,255,0.08);
+}
+
+.active{background:#7c3aed;}
+
+.section{display:none;}
+.section.active{display:block;}
+
+.btn{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#7c3aed,#4f46e5);
+  color:white;
+}
+
+input,select{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  margin:6px 0;
+  background:rgba(255,255,255,0.1);
+  color:white;
 }
 </style>
 </head>
 
 <body>
 
-<div id="app"></div>
+<canvas id="bg"></canvas>
 
+<div class="container">
+<div class="card">
+
+<h1>nope</h1>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('home',this)">Home</div>
+  <div class="tab" onclick="switchTab('misc',this)">Misc</div>
+  <div class="tab" onclick="switchTab('settings',this)">Settings</div>
+</div>
+
+<div id="home" class="section active">
+  <button class="btn" onclick="openRotating('truffled')">Truffled</button>
+  <button class="btn" onclick="openRotating('sdxp')">SDXP</button>
+  <button class="btn" onclick="openRotating('fern')">Fern</button>
+  <button class="btn" onclick="openRotating('ghostlink')">Ghostlink</button>
+  <button class="btn" onclick="openRotating('apollo')">Apollo</button>
+</div>
+
+<div id="misc" class="section">
+  <input id="url" placeholder="https://example.com">
+  <button class="btn" onclick="openCustom()">Open Link</button>
+  <button class="btn" onclick="joinDiscord()">Join Discord</button>
+</div>
+
+<div id="settings" class="section">
+  <input id="panic" placeholder="panic url">
+  <button class="btn" onclick="savePanic()">Save Panic</button>
+
+  <select id="cloak">
+    <option value="google">Google</option>
+    <option value="classroom">Classroom</option>
+  </select>
+  <button class="btn" onclick="applyCloak()">Apply Cloak</button>
+</div>
+
+</div>
+</div>
+
+<!-- THIS IS IMPORTANT -->
 <script src="app.js"></script>
+
 </body>
 </html>
