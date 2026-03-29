@@ -1,210 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>nope</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+  <title>nope</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-:root {
-  --purple1: #a855f7;
-  --purple2: #7c3aed;
-  --accent1: #c084fc;
-  --glass: rgba(168, 85, 247, 0.12);
-  --border: rgba(168, 85, 247, 0.35);
-}
+  <style>
+    :root {
+      --p1:#a855f7;
+      --p2:#7c3aed;
+      --p3:#c084fc;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Inter, system-ui;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, system-ui;
+    }
 
-body {
-  height: 100vh;
-  overflow: hidden;
-  background: radial-gradient(circle at top, #0a0014, #000);
-  color: #f9fafb;
-}
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #0a0014, #000);
+      color: #fff;
+    }
 
-/* GLASS BOOST */
-.card {
-  backdrop-filter: blur(40px) saturate(250%);
-  background:
-    radial-gradient(circle at 0% 0%, rgba(168,85,247,0.35), transparent 55%),
-    radial-gradient(circle at 100% 0%, rgba(192,132,252,0.25), transparent 55%),
-    linear-gradient(145deg, rgba(20,0,40,0.95), rgba(40,0,80,0.85));
-  border: 1px solid var(--border);
-  box-shadow:
-    0 40px 140px rgba(0,0,0,0.9),
-    inset 0 1px 0 rgba(255,255,255,0.25);
-}
+    /* animated glow bg */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(168,85,247,.25), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(192,132,252,.2), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(124,58,237,.25), transparent 40%);
+      filter: blur(80px);
+      animation: move 10s infinite linear;
+      z-index: 0;
+    }
 
-/* buttons more glossy */
-.btn {
-  background:
-    linear-gradient(135deg, rgba(168,85,247,0.4), rgba(124,58,237,0.6)),
-    linear-gradient(145deg, #1a0033, #3b0764);
-  backdrop-filter: blur(10px);
-}
+    @keyframes move {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-50px, 30px); }
+      100% { transform: translate(0, 0); }
+    }
 
-.btn:hover {
-  box-shadow:
-    0 20px 50px rgba(168,85,247,0.8),
-    0 0 20px rgba(192,132,252,0.6);
-}
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
 
-/* tabs */
-.tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 18px;
-}
+    /* LIQUID GLASS */
+    .card {
+      width: 850px;
+      padding: 28px;
+      border-radius: 28px;
+      position: relative;
+      overflow: hidden;
 
-.tab {
-  flex: 1;
-  padding: 9px;
-  border-radius: 999px;
-  background: rgba(20,0,40,0.8);
-  border: 1px solid var(--border);
-  text-align: center;
-  cursor: pointer;
-}
+      background: linear-gradient(145deg, rgba(20,0,40,.7), rgba(40,0,80,.5));
+      backdrop-filter: blur(40px) saturate(180%);
+      border: 1px solid rgba(255,255,255,.15);
 
-.tab.active {
-  background: linear-gradient(135deg, var(--purple1), var(--purple2));
-}
+      box-shadow: 0 40px 140px rgba(0,0,0,.9);
+    }
 
-/* sections */
-.section { display: none; }
-.section.active { display: block; }
+    /* moving gloss */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.2), transparent 60%);
+      animation: glassMove 8s linear infinite;
+      mix-blend-mode: screen;
+    }
 
-/* input */
-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(20,0,40,0.9);
-  color: white;
-}
+    @keyframes glassMove {
+      0%   { transform: translate(-20%, -20%); }
+      50%  { transform: translate(20%, 20%); }
+      100% { transform: translate(-20%, -20%); }
+    }
 
-.input-group {
-  display: flex;
-  gap: 10px;
-  margin-top: 14px;
-}
+    h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, #fff, #c4b5fd, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.small {
-  margin-top: 14px;
-  font-size: 0.7rem;
-  text-align: right;
-  opacity: 0.7;
-}
-</style>
+    .subtitle {
+      font-size: .7rem;
+      color: #c4b5fd;
+      letter-spacing: .2em;
+    }
+
+    /* tabs */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin: 18px 0;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(20,0,40,.8);
+      border: 1px solid rgba(255,255,255,.1);
+      cursor: pointer;
+      text-align: center;
+      transition: .2s;
+    }
+
+    .tab.active {
+      background: linear-gradient(135deg, var(--p1), var(--p2));
+    }
+
+    /* sections */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* BUTTONS (MAGNETIC + LIGHT REACT) */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+
+      background: linear-gradient(145deg, #1a0033, #3b0764);
+      color: white;
+      cursor: pointer;
+
+      position: relative;
+      overflow: hidden;
+
+      transition: transform .15s ease, box-shadow .2s;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.25), transparent 60%);
+      opacity: 0;
+      transition: .2s;
+    }
+
+    .btn:hover::before { opacity: 1; }
+
+    .btn:hover {
+      box-shadow: 0 20px 60px rgba(168,85,247,.7);
+    }
+
+    /* INPUT */
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(20,0,40,.9);
+      color: white;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .small {
+      margin-top: 14px;
+      font-size: .7rem;
+      text-align: right;
+      opacity: .7;
+    }
+
+    /* cursor trail */
+    .trail {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c084fc;
+      pointer-events: none;
+      animation: f .4s forwards;
+    }
+
+    @keyframes f {
+      to {
+        opacity: 0;
+        transform: scale(.3);
+      }
+    }
+  </style>
 </head>
 
 <body>
-
-<div class="wrapper">
-  <div class="card">
-    <div class="header-panel">
+  <div class="wrapper">
+    <div class="card">
       <h1>nope</h1>
       <div class="subtitle">Pr0xy launcher</div>
-    </div>
 
-    <div class="tabs">
-      <div class="tab active" onclick="switchTab('home', this)">Home</div>
-      <div class="tab" onclick="switchTab('settings', this)">Settings</div>
-    </div>
-
-    <!-- HOME -->
-    <div id="home" class="section active">
-      <button class="btn" onclick="openBlank('https://truffled.onrender.com')">Truffled</button>
-      <button class="btn" onclick="openBlank('https://sdxp.onrender.com')">SDXP</button>
-      <button class="btn" onclick="openBlank('https://fern.onrender.com')">Fern</button>
-    </div>
-
-    <!-- SETTINGS -->
-    <div id="settings" class="section">
-
-      <!-- URL OPENER -->
-      <div class="input-group">
-        <input id="url" placeholder="https://example.com" />
-        <button class="btn" onclick="openCustom()">Open</button>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('home', this)">Home</div>
+        <div class="tab" onclick="switchTab('settings', this)">Settings</div>
       </div>
 
-      <!-- PANIC -->
-      <input id="panicUrl" placeholder="Panic URL" style="margin-top:10px"/>
-      <button class="btn" style="margin-top:10px" onclick="savePanic()">Save Panic</button>
+      <div id="home" class="section active">
+        <button class="btn" data-magnetic onclick="openBlank('https://truffled.onrender.com')">Truffled</button>
+        <button class="btn" data-magnetic onclick="openBlank('https://sdxp.onrender.com')">SDXP</button>
+        <button class="btn" data-magnetic onclick="openBlank('https://fern.onrender.com')">Fern</button>
+      </div>
 
-      <!-- CLOAK -->
-      <button class="btn" style="margin-top:10px" onclick="applyCloak()">Apply Cloak</button>
+      <div id="settings" class="section">
+        <div class="input-group">
+          <input id="url" placeholder="https://example.com">
+          <button class="btn" data-magnetic onclick="openCustom()">Open</button>
+        </div>
 
-      <div class="small">panic key: <b>`</b></div>
+        <input id="panicUrl" placeholder="Panic URL" style="margin-top:10px">
+        <button class="btn" data-magnetic onclick="savePanic()">Save Panic</button>
+
+        <button class="btn" data-magnetic onclick="applyCloak()">Apply Cloak</button>
+
+        <div class="small">panic key: <b>`</b></div>
+      </div>
+
+      <div class="small">made by nope</div>
     </div>
-
-    <div class="small">made by nope</div>
   </div>
-</div>
 
-<script>
-function switchTab(id, el) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById(id).classList.add('active');
-}
+  <script>
+    function switchTab(id, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById(id).classList.add('active');
+    }
 
-/* loader (same but text changed) */
-function openBlank(url) {
-  const w = window.open('about:blank', '_blank');
-  if (!w) return;
+    /* ☕ loader */
+    function openBlank(url) {
+      const w = window.open('about:blank', '_blank');
+      if (!w) return;
 
-  w.document.write(`
-  <body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0014;color:white;font-family:sans-serif;">
-    <div id="l">
-      <div style="width:90px;height:70px;background:linear-gradient(#a855f7,#7c3aed);border-radius:0 0 20px 20px;"></div>
-      <div style="margin-top:10px;font-size:11px;letter-spacing:.15em;color:#c4b5fd">
-        Loading Portal using Cafe ☕
-      </div>
-    </div>
-    <script>
-      const f=document.createElement('iframe');
-      f.src="${url}";
-      f.style="position:absolute;inset:0;width:100%;height:100%;border:none;";
-      f.onload=()=>document.getElementById('l').style.display='none';
-      document.body.appendChild(f);
-    <\/script>
-  </body>`);
-}
+      const loaderHTML = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loading...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; width: 100%; }
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #0a0014;
+      color: white;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+    }
+    #l {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .mug {
+      width: 90px;
+      height: 70px;
+      background: linear-gradient(#a855f7, #7c3aed);
+      border-radius: 0 0 20px 20px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(168,85,247,.6);
+    }
+    .mug::after {
+      content: "";
+      position: absolute;
+      right: -20px;
+      top: 10px;
+      width: 20px;
+      height: 30px;
+      border: 4px solid #c4b5fd;
+      border-left: none;
+      border-radius: 0 12px 12px 0;
+    }
+    .label {
+      margin-top: 12px;
+      font-size: 11px;
+      letter-spacing: .15em;
+      color: #c4b5fd;
+      text-transform: uppercase;
+    }
+    iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="l">
+    <div class="mug"></div>
+    <div class="label">Loading Portal using Cafe ☕</div>
+  </div>
+  <script>
+    const f = document.createElement('iframe');
+    f.src = ${JSON.stringify(url)};
+    f.onload = () => {
+      const loader = document.getElementById('l');
+      if (loader) loader.style.display = 'none';
+    };
+    document.body.appendChild(f);
+  <\/script>
+</body>
+</html>`;
 
-function openCustom() {
-  let url = document.getElementById('url').value.trim();
-  if (!url) return;
-  if (!/^https?:\\/\\//i.test(url)) url = 'https://' + url;
-  openBlank(url);
-}
+      w.document.open();
+      w.document.write(loaderHTML);
+      w.document.close();
+    }
 
-/* panic */
-let panic = localStorage.getItem('panic') || 'https://google.com';
-function savePanic() {
-  const val = document.getElementById('panicUrl').value.trim();
-  if (val) {
-    panic = val;
-    localStorage.setItem('panic', panic);
-  }
-}
-document.addEventListener('keydown', (e) => {
-  if (e.key === '`') location.href = panic;
-});
+    function openCustom() {
+      let url = document.getElementById('url').value.trim();
+      if (!url) return;
+      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+      openBlank(url);
+    }
 
-/* cloak */
-function applyCloak() {
-  document.title = 'Google';
-}
-</script>
+    /* panic */
+    let panic = localStorage.getItem('panic') || 'https://google.com';
 
+    function savePanic() {
+      const v = document.getElementById('panicUrl').value.trim();
+      if (v) {
+        panic = v;
+        localStorage.setItem('panic', panic);
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === '`') location.href = panic;
+    });
+
+    /* cloak */
+    function applyCloak() {
+      document.title = 'Google';
+    }
+
+    /* magnetic buttons */
+    document.querySelectorAll('[data-magnetic]').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        btn.style.setProperty('--x', x + 'px');
+        btn.style.setProperty('--y', y + 'px');
+        btn.style.transform = `translate(${(x - r.width / 2) / 10}px, ${(y - r.height / 2) / 10}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0,0)';
+      });
+    });
+
+    /* trail */
+    document.addEventListener('mousemove', e => {
+      const d = document.createElement('div');
+      d.className = 'trail';
+      d.style.left = e.clientX + 'px';
+      d.style.top = e.clientY + 'px';
+      document.body.appendChild(d);
+      setTimeout(() => d.remove(), 400);
+    });
+  </script>
 </body>
 </html>
