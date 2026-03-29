@@ -110,21 +110,50 @@ h1{
 .section{display:none;}
 .section.active{display:block;}
 
-/* Buttons */
 .btn{
   width:100%;
   padding:14px;
   border-radius:14px;
   border:1px solid rgba(255,255,255,0.15);
 
-  background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(255,255,255,0.05));
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  backdrop-filter: blur(20px);
+
   color:#fff;
-
   cursor:pointer;
-  margin-bottom:10px;
 
-  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  transition: all 0.25s ease;
   position:relative;
+  overflow:hidden;
+}
+
+/* Glossy shine sweep */
+.btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-150%;
+  width:150%;
+  height:100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+  transition:0.5s;
+}
+
+.btn:hover::before{
+  left:150%;
+}
+
+/* Hover lift + glow */
+.btn:hover{
+  transform: translateY(-3px) scale(1.03);
+  box-shadow:
+    0 15px 40px rgba(168,139,250,0.25),
+    inset 0 1px rgba(255,255,255,0.2);
 }
 
 /* Magnetic hover glow */
@@ -141,30 +170,21 @@ h1{
   margin-top:15px;
 }
 
-input{
+.input-group{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+  align-items:center;
+}
+
+.input-group input{
   flex:1;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.15);
-  background:rgba(255,255,255,0.05);
-  color:#fff;
+  min-width:0;
 }
 
-/* Cursor trail */
-.trail{
-  position:fixed;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  pointer-events:none;
-  background:radial-gradient(circle,rgba(167,139,250,0.9),transparent 70%);
-  filter:blur(6px);
-  animation:fade 0.4s linear forwards;
-  z-index:999;
-}
-
-@keyframes fade{
-  to{opacity:0; transform:scale(1.6);}
+.input-group button{
+  flex-shrink:0;
+  white-space:nowrap;
 }
 
 /* Subtext */
@@ -269,17 +289,16 @@ document.querySelectorAll('.btn').forEach(btn=>{
     const x = e.clientX - r.left;
     const y = e.clientY - r.top;
 
-    const mx = (x - r.width/2)/10;
-    const my = (y - r.height/2)/10;
+    const moveX = (x - r.width/2) / 8;
+    const moveY = (y - r.height/2) / 8;
 
-    btn.style.transform = `translate(${mx}px,${my}px) scale(1.05)`;
+    btn.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.04)`;
   });
 
   btn.addEventListener('mouseleave', ()=>{
     btn.style.transform = 'translate(0,0) scale(1)';
   });
 });
-
 /* Cursor trail */
 document.addEventListener('mousemove', e=>{
   const d = document.createElement('div');
