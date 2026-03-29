@@ -7,11 +7,10 @@
 
 <style>
 :root{
-  --glass-bg:rgba(255,255,255,0.05);
-  --glass-border:rgba(255,255,255,0.1);
-  --blur:30px;
-  --radius:32px;
-  --anim:0.25s ease;
+  --purple1:#8b5cf6;
+  --purple2:#6d28d9;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.12);
 }
 
 /* Reset */
@@ -25,20 +24,18 @@
 body{
   height:100vh;
   overflow:hidden;
+  background: radial-gradient(circle at top, #1a0b2e, #05010a);
   color:#fff;
-  background:#020617; /* removed purple */
 }
 
-/* Canvas */
+/* Canvas background */
 canvas{
   position:fixed;
   inset:0;
-  width:100%;
-  height:100%;
   z-index:0;
 }
 
-/* Wrapper */
+/* Center wrapper */
 .wrapper{
   position:relative;
   z-index:2;
@@ -48,52 +45,68 @@ canvas{
   justify-content:center;
 }
 
-/* Card */
+/* Floating glossy island card */
 .card{
-  width:720px;
+  width:800px;
   max-width:95%;
-  padding:40px;
-  border-radius:var(--radius);
-  background:var(--glass-bg);
-  border:1px solid var(--glass-border);
-  backdrop-filter:blur(var(--blur));
-  box-shadow:0 40px 120px rgba(0,0,0,0.7);
+  padding:50px;
+  border-radius:30px;
+
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+  border:1px solid var(--border);
+
+  backdrop-filter: blur(30px);
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.8),
+    inset 0 1px rgba(255,255,255,0.2);
+
   text-align:center;
   position:relative;
+  overflow:hidden;
+}
+
+/* Glossy highlight */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-200px;
+  background: radial-gradient(circle at top, rgba(139,92,246,0.25), transparent 60%);
+  z-index:0;
 }
 
 /* Title */
 h1{
-  font-size:2.4rem;
-  margin-bottom:1.2rem;
+  position:relative;
+  z-index:1;
+  font-size:2.6rem;
+  margin-bottom:20px;
+  background: linear-gradient(90deg,#fff,#c4b5fd);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
 }
 
 /* Tabs */
 .tabs{
   display:flex;
   gap:10px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
+  margin-bottom:25px;
+  position:relative;
+  z-index:1;
 }
 
 .tab{
   flex:1;
   padding:12px;
-  border-radius:14px;
-  background:rgba(255,255,255,0.08);
+  border-radius:12px;
+  background:rgba(255,255,255,0.07);
   cursor:pointer;
-  transition:var(--anim);
-}
-
-.tab:hover{
-  transform:translateY(-2px);
+  transition:0.2s;
 }
 
 .tab.active{
-  background:rgba(255,255,255,0.15); /* no purple */
+  background:linear-gradient(135deg,var(--purple1),var(--purple2));
 }
 
-/* Sections */
 .section{display:none;}
 .section.active{display:block;}
 
@@ -101,94 +114,64 @@ h1{
 .btn{
   width:100%;
   padding:14px;
-  border-radius:16px;
+  border-radius:14px;
   border:1px solid rgba(255,255,255,0.15);
-  background:rgba(255,255,255,0.05);
+
+  background: linear-gradient(135deg, rgba(139,92,246,0.25), rgba(255,255,255,0.05));
   color:#fff;
+
   cursor:pointer;
-  transition:background .2s ease, transform .2s ease;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
+  margin-bottom:10px;
+
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  position:relative;
 }
 
+/* Magnetic hover glow */
 .btn:hover{
-  background:rgba(255,255,255,0.12);
+  box-shadow:
+    0 10px 30px rgba(139,92,246,0.35),
+    inset 0 1px rgba(255,255,255,0.2);
 }
 
-.small-btn{
-  width:auto;
-  padding:12px 18px;
-}
-
-/* Inputs */
+/* Input */
 .input-group{
   display:flex;
   gap:10px;
-  margin:15px 0;
+  margin-top:15px;
 }
 
-input, select{
+input{
   flex:1;
   padding:12px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.15);
   background:rgba(255,255,255,0.05);
   color:#fff;
 }
 
-/* Toggle */
-.toggle-wrapper{
-  position:absolute;
-  top:12px;
-  right:12px;
-}
-
-.toggle{
-  appearance:none;
-  width:44px;
-  height:24px;
-  background:#555;
-  border-radius:12px;
-  position:relative;
-  cursor:pointer;
-}
-
-.toggle::before{
-  content:"";
-  position:absolute;
-  inset:2px;
-  width:20px;
-  height:20px;
-  background:#fff;
+/* Cursor trail */
+.trail{
+  position:fixed;
+  width:14px;
+  height:14px;
   border-radius:50%;
-  transition:transform .2s;
+  pointer-events:none;
+  background:radial-gradient(circle,rgba(167,139,250,0.9),transparent 70%);
+  filter:blur(6px);
+  animation:fade 0.4s linear forwards;
+  z-index:999;
 }
 
-.toggle:checked::before{
-  transform:translateX(20px);
+@keyframes fade{
+  to{opacity:0; transform:scale(1.6);}
 }
 
-/* Small text */
+/* Subtext */
 .small{
-  margin-top:15px;
-  opacity:.6;
+  margin-top:20px;
+  opacity:0.6;
   font-size:12px;
-}
-
-/* Focus */
-button:focus,
-input:focus,
-select:focus{
-  outline:2px solid #fff;
-  outline-offset:2px;
-}
-
-/* Mobile */
-@media (max-width:500px){
-  .card{padding:20px;}
-  h1{font-size:2rem;}
 }
 </style>
 </head>
@@ -199,10 +182,6 @@ select:focus{
 
 <div class="wrapper">
   <div class="card">
-
-    <div class="toggle-wrapper">
-      <input type="checkbox" id="darkToggle" class="toggle">
-    </div>
 
     <h1>nope</h1>
 
@@ -222,10 +201,8 @@ select:focus{
 
       <div class="input-group">
         <input id="url" placeholder="https://example.com">
-        <button class="btn small-btn" onclick="openCustom()">Open</button>
+        <button class="btn" onclick="openCustom()">Open</button>
       </div>
-
-      <button class="btn" onclick="joinDiscord()">Join Discord</button>
     </div>
 
     <!-- MISC -->
@@ -236,10 +213,6 @@ select:focus{
 
     <!-- SETTINGS -->
     <div id="settings" class="section">
-      <select id="cloak">
-        <option value="Google">Google</option>
-        <option value="Classroom">Classroom</option>
-      </select>
       <button class="btn" onclick="applyCloak()">Apply Cloak</button>
     </div>
 
@@ -263,17 +236,12 @@ function openBlank(url){
   w.document.write(`<iframe src="${url}" style="border:none;width:100vw;height:100vh;"></iframe>`);
 }
 
-/* Custom URL */
+/* Custom */
 function openCustom(){
   let url = document.getElementById('url').value.trim();
   if(!url) return;
   if(!url.startsWith('http')) url = 'https://' + url;
   openBlank(url);
-}
-
-/* Discord */
-function joinDiscord(){
-  openBlank('https://discord.gg/');
 }
 
 /* Panic */
@@ -291,63 +259,75 @@ document.addEventListener('keydown', e=>{
 
 /* Cloak */
 function applyCloak(){
-  const choice = document.getElementById('cloak').value;
-  if(choice === 'Google'){
-    document.title = 'Google';
-    setFavicon('https://www.google.com/favicon.ico');
-  }else{
-    document.title = 'Classes';
-    setFavicon('https://ssl.gstatic.com/classroom/favicon.png');
-  }
+  document.title = "Google";
 }
 
-function setFavicon(url){
-  let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-  link.rel = 'icon';
-  link.href = url;
-  document.head.appendChild(link);
-}
+/* Magnetic buttons */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('mousemove', e=>{
+    const r = btn.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
 
-/* Particles (neutral color) */
+    const mx = (x - r.width/2)/10;
+    const my = (y - r.height/2)/10;
+
+    btn.style.transform = `translate(${mx}px,${my}px) scale(1.05)`;
+  });
+
+  btn.addEventListener('mouseleave', ()=>{
+    btn.style.transform = 'translate(0,0) scale(1)';
+  });
+});
+
+/* Cursor trail */
+document.addEventListener('mousemove', e=>{
+  const d = document.createElement('div');
+  d.className = 'trail';
+  d.style.left = e.clientX + 'px';
+  d.style.top = e.clientY + 'px';
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),400);
+});
+
+/* Bouncing particles */
 const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
 
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 }
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+resize();
+window.addEventListener('resize', resize);
 
-const particles = Array.from({length:100},()=>({
-  x: Math.random()*canvas.width,
-  y: Math.random()*canvas.height,
-  r: Math.random()*1.5+0.2,
-  dx:(Math.random()-0.5)*0.3,
-  dy:(Math.random()-0.5)*0.3
+const balls = Array.from({length:80},()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*3+1,
+  dx:(Math.random()-0.5)*1.2,
+  dy:(Math.random()-0.5)*1.2
 }));
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  particles.forEach(p=>{
-    p.x+=p.dx;
-    p.y+=p.dy;
-    if(p.x<0||p.x>canvas.width) p.dx*=-1;
-    if(p.y<0||p.y>canvas.height) p.dy*=-1;
+
+  balls.forEach(b=>{
+    b.x += b.dx;
+    b.y += b.dy;
+
+    if(b.x<0||b.x>canvas.width) b.dx*=-1;
+    if(b.y<0||b.y>canvas.height) b.dy*=-1;
 
     ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,255,255,0.2)';
+    ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.fillStyle = 'rgba(168,139,250,0.6)';
     ctx.fill();
   });
+
   requestAnimationFrame(animate);
 }
 animate();
-
-/* Toggle theme (subtle only) */
-document.getElementById('darkToggle').addEventListener('change', e=>{
-  document.body.style.background = e.target.checked ? '#0b1220' : '#020617';
-});
 </script>
 
 </body>
