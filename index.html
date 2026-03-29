@@ -16,7 +16,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Inter, system-ui;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
@@ -36,13 +36,13 @@
         radial-gradient(circle at 80% 30%, rgba(192,132,252,.2), transparent 40%),
         radial-gradient(circle at 50% 80%, rgba(124,58,237,.25), transparent 40%);
       filter: blur(80px);
-      animation: move 10s infinite linear;
+      animation: move 14s infinite linear;
       z-index: 0;
     }
 
     @keyframes move {
-      0% { transform: translate(0, 0); }
-      50% { transform: translate(-50px, 30px); }
+      0%   { transform: translate(0, 0); }
+      50%  { transform: translate(-60px, 40px); }
       100% { transform: translate(0, 0); }
     }
 
@@ -53,12 +53,13 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      padding: 16px;
     }
 
-    /* LIQUID GLASS */
+    /* LIQUID GLASS CARD */
     .card {
-      width: 850px;
-      padding: 28px;
+      width: min(900px, 100%);
+      padding: 28px 26px 22px;
       border-radius: 28px;
       position: relative;
       overflow: hidden;
@@ -66,7 +67,6 @@
       background: linear-gradient(145deg, rgba(20,0,40,.7), rgba(40,0,80,.5));
       backdrop-filter: blur(40px) saturate(180%);
       border: 1px solid rgba(255,255,255,.15);
-
       box-shadow: 0 40px 140px rgba(0,0,0,.9);
     }
 
@@ -75,15 +75,25 @@
       content: "";
       position: absolute;
       inset: -50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.2), transparent 60%);
-      animation: glassMove 8s linear infinite;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 60%);
+      animation: glassMove 10s linear infinite;
       mix-blend-mode: screen;
+      opacity: .75;
+      pointer-events: none;
     }
 
     @keyframes glassMove {
-      0%   { transform: translate(-20%, -20%); }
-      50%  { transform: translate(20%, 20%); }
-      100% { transform: translate(-20%, -20%); }
+      0%   { transform: translate(-18%, -18%); }
+      50%  { transform: translate(18%, 18%); }
+      100% { transform: translate(-18%, -18%); }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     h1 {
@@ -91,94 +101,190 @@
       background: linear-gradient(90deg, #fff, #c4b5fd, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      letter-spacing: .03em;
     }
 
     .subtitle {
       font-size: .7rem;
       color: #c4b5fd;
       letter-spacing: .2em;
+      text-transform: uppercase;
     }
 
     /* tabs */
     .tabs {
-      display: flex;
-      gap: 8px;
-      margin: 18px 0;
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(8,0,20,.85);
+      border: 1px solid rgba(255,255,255,.06);
     }
 
     .tab {
-      flex: 1;
-      padding: 8px;
+      padding: 6px 14px;
       border-radius: 999px;
-      background: rgba(20,0,40,.8);
-      border: 1px solid rgba(255,255,255,.1);
+      background: transparent;
+      border: none;
       cursor: pointer;
-      text-align: center;
+      font-size: .78rem;
+      color: #a5b4fc;
+      letter-spacing: .08em;
+      text-transform: uppercase;
       transition: .2s;
+      white-space: nowrap;
     }
 
     .tab.active {
       background: linear-gradient(135deg, var(--p1), var(--p2));
+      color: #f9fafb;
+      box-shadow: 0 0 20px rgba(168,85,247,.6);
+    }
+
+    main {
+      margin-top: 16px;
     }
 
     /* sections */
     .section { display: none; }
     .section.active { display: block; }
 
-    /* BUTTONS (MAGNETIC + LIGHT REACT) */
+    /* GRID OF PROXIES */
+    .grid-title {
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .proxy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
     .btn {
       width: 100%;
-      padding: 12px;
-      margin: 8px 0;
+      padding: 11px 12px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.1);
-
-      background: linear-gradient(145deg, #1a0033, #3b0764);
+      border: 1px solid rgba(255,255,255,.09);
+      background: radial-gradient(circle at top left, rgba(192,132,252,.35), transparent 50%),
+                  linear-gradient(145deg, #1a0033, #3b0764);
       color: white;
       cursor: pointer;
-
       position: relative;
       overflow: hidden;
+      transition: transform .18s ease, box-shadow .24s ease, border-color .2s;
+      text-align: left;
+    }
 
-      transition: transform .15s ease, box-shadow .2s;
+    .btn-label {
+      font-size: .88rem;
+      font-weight: 500;
+    }
+
+    .btn-sub {
+      font-size: .68rem;
+      opacity: .65;
+      margin-top: 2px;
     }
 
     .btn::before {
       content: "";
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.25), transparent 60%);
+      inset: -30%;
+      background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.22), transparent 58%);
       opacity: 0;
-      transition: .2s;
+      transition: opacity .2s;
+      pointer-events: none;
+      mix-blend-mode: screen;
     }
 
     .btn:hover::before { opacity: 1; }
 
     .btn:hover {
       box-shadow: 0 20px 60px rgba(168,85,247,.7);
+      border-color: rgba(255,255,255,.18);
     }
 
-    /* INPUT */
-    input {
-      width: 100%;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(20,0,40,.9);
-      color: white;
+    .btn:active {
+      transform: translateY(1px) scale(.99);
+      box-shadow: 0 10px 30px rgba(15,23,42,.9);
+    }
+
+    /* settings layout */
+    .settings-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 780px) {
+      .settings-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .block-label {
+      font-size: .72rem;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 6px;
     }
 
     .input-group {
       display: flex;
       gap: 10px;
-      margin-top: 14px;
+      margin-top: 6px;
     }
 
-    .small {
-      margin-top: 14px;
+    input {
+      width: 100%;
+      padding: 10px 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(11,0,26,.9);
+      color: white;
+      font-size: .8rem;
+      outline: none;
+      transition: border-color .18s, box-shadow .18s, background .18s;
+    }
+
+    input::placeholder {
+      color: rgba(148,163,184,.9);
+    }
+
+    input:focus {
+      border-color: rgba(192,132,252,.9);
+      box-shadow: 0 0 0 1px rgba(192,132,252,.7);
+      background: rgba(15,6,35,.98);
+    }
+
+    .settings-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .hint {
       font-size: .7rem;
-      text-align: right;
       opacity: .7;
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    footer {
+      margin-top: 12px;
+      font-size: .7rem;
+      opacity: .7;
+      text-align: right;
     }
 
     /* cursor trail */
@@ -189,14 +295,15 @@
       border-radius: 50%;
       background: #c084fc;
       pointer-events: none;
-      animation: f .4s forwards;
+      animation: f .45s forwards;
+      filter: blur(.5px);
+      mix-blend-mode: screen;
+      z-index: 9999;
     }
 
     @keyframes f {
-      to {
-        opacity: 0;
-        transform: scale(.3);
-      }
+      0%   { opacity: .9; transform: scale(1); }
+      100% { opacity: 0;  transform: scale(.3) translateY(4px); }
     }
   </style>
 </head>
@@ -204,35 +311,110 @@
 <body>
   <div class="wrapper">
     <div class="card">
-      <h1>nope</h1>
-      <div class="subtitle">Pr0xy launcher</div>
-
-      <div class="tabs">
-        <div class="tab active" onclick="switchTab('home', this)">Home</div>
-        <div class="tab" onclick="switchTab('settings', this)">Settings</div>
-      </div>
-
-      <div id="home" class="section active">
-        <button class="btn" data-magnetic onclick="openBlank('https://truffled.onrender.com')">Truffled</button>
-        <button class="btn" data-magnetic onclick="openBlank('https://sdxp.onrender.com')">SDXP</button>
-        <button class="btn" data-magnetic onclick="openBlank('https://fern.onrender.com')">Fern</button>
-      </div>
-
-      <div id="settings" class="section">
-        <div class="input-group">
-          <input id="url" placeholder="https://example.com">
-          <button class="btn" data-magnetic onclick="openCustom()">Open</button>
+      <header>
+        <div>
+          <h1>nope</h1>
+          <div class="subtitle">Pr0xy launcher</div>
         </div>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('home', this)">Home</button>
+          <button class="tab" onclick="switchTab('settings', this)">Settings</button>
+        </div>
+      </header>
 
-        <input id="panicUrl" placeholder="Panic URL" style="margin-top:10px">
-        <button class="btn" data-magnetic onclick="savePanic()">Save Panic</button>
+      <main>
+        <!-- HOME -->
+        <section id="home" class="section active">
+          <div class="grid-title">quick portals</div>
+          <div class="proxy-grid">
+            <button class="btn" data-magnetic onclick="openBlank('https://truffled.onrender.com')">
+              <div class="btn-label">Truffled</div>
+              <div class="btn-sub">Clean UI • Fast</div>
+            </button>
 
-        <button class="btn" data-magnetic onclick="applyCloak()">Apply Cloak</button>
+            <button class="btn" data-magnetic onclick="openBlank('https://sdxp.onrender.com')">
+              <div class="btn-label">SDXP</div>
+              <div class="btn-sub">Minimal • Stable</div>
+            </button>
 
-        <div class="small">panic key: <b>`</b></div>
-      </div>
+            <button class="btn" data-magnetic onclick="openBlank('https://fern.onrender.com')">
+              <div class="btn-label">Fern</div>
+              <div class="btn-sub">Alt route</div>
+            </button>
 
-      <div class="small">made by nope</div>
+            <button class="btn" data-magnetic onclick="openBlank('https://ultraviolet-node.onrender.com')">
+              <div class="btn-label">Ultraviolet</div>
+              <div class="btn-sub">Ultraviolet stack</div>
+            </button>
+
+            <button class="btn" data-magnetic onclick="openBlank('https://holy-unblocker.onrender.com')">
+              <div class="btn-label">Holy</div>
+              <div class="btn-sub">Multi-proxy hub</div>
+            </button>
+
+            <button class="btn" data-magnetic onclick="openBlank('https://interstellar.onrender.com')">
+              <div class="btn-label">Interstellar</div>
+              <div class="btn-sub">Game / app hub</div>
+            </button>
+
+            <button class="btn" data-magnetic onclick="openBlank('https://rammerhead.onrender.com')">
+              <div class="btn-label">Rammerhead</div>
+              <div class="btn-sub">Full browser style</div>
+            </button>
+
+            <button class="btn" data-magnetic onclick="openBlank('https://nebulaproxy.onrender.com')">
+              <div class="btn-label">Nebula</div>
+              <div class="btn-sub">Experimental</div>
+            </button>
+          </div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section id="settings" class="section">
+          <div class="settings-grid">
+            <div>
+              <div class="block-label">custom url</div>
+              <div class="input-group">
+                <input id="url" placeholder="https://example.com">
+                <button class="btn" data-magnetic onclick="openCustom()">
+                  <div class="btn-label">Open</div>
+                </button>
+              </div>
+
+              <div style="margin-top:14px;">
+                <div class="block-label">panic url</div>
+                <div class="input-group">
+                  <input id="panicUrl" placeholder="https://google.com">
+                  <button class="btn" data-magnetic onclick="savePanic()">
+                    <div class="btn-label">Save</div>
+                  </button>
+                </div>
+                <div class="hint">panic key: <b>`</b> (backtick)</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="block-label">cloak</div>
+              <div class="settings-actions">
+                <button class="btn" data-magnetic onclick="applyCloak('Google')">
+                  <div class="btn-label">Google tab</div>
+                  <div class="btn-sub">Title: Google • Safe</div>
+                </button>
+                <button class="btn" data-magnetic onclick="applyCloak('Classroom')">
+                  <div class="btn-label">Classroom tab</div>
+                  <div class="btn-sub">Title: Classroom</div>
+                </button>
+                <button class="btn" data-magnetic onclick="applyCloak('Docs – Untitled document')">
+                  <div class="btn-label">Docs tab</div>
+                  <div class="btn-sub">Title: Docs</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>made by nope</footer>
     </div>
   </div>
 
@@ -244,7 +426,7 @@
       document.getElementById(id).classList.add('active');
     }
 
-    /* ☕ loader */
+    /* ☕ animated cafe loader */
     function openBlank(url) {
       const w = window.open('about:blank', '_blank');
       if (!w) return;
@@ -260,48 +442,117 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; width: 100%; }
     body {
-      margin: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background: #0a0014;
+      background: radial-gradient(circle at top, #020016, #020617);
       color: white;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
       overflow: hidden;
     }
-    #l {
+    #loader-wrap {
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 10px;
     }
-    .mug {
-      width: 90px;
-      height: 70px;
-      background: linear-gradient(#a855f7, #7c3aed);
-      border-radius: 0 0 20px 20px;
+    .mug-shell {
       position: relative;
-      box-shadow: 0 0 30px rgba(168,85,247,.6);
+      width: 90px;
+      height: 72px;
+      border-radius: 8px 8px 20px 20px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, #f97316, #7c3aed);
+      box-shadow: 0 0 40px rgba(168,85,247,.8);
+      isolation: isolate;
     }
-    .mug::after {
-      content: "";
+    .coffee-fill {
       position: absolute;
-      right: -20px;
-      top: 10px;
-      width: 20px;
-      height: 30px;
-      border: 4px solid #c4b5fd;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 0%;
+      background: linear-gradient(#1f2937, #020617);
+      animation: fill 3.4s cubic-bezier(.4,.0,.2,1) forwards;
+      transform-origin: bottom;
+      z-index: 1;
+    }
+    .coffee-surface {
+      position: absolute;
+      inset: auto 4px 54%;
+      height: 8px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #fbbf24, transparent 55%),
+                  radial-gradient(circle at 70% 0%, #fed7aa, transparent 55%),
+                  #0f172a;
+      filter: blur(.4px);
+      opacity: 0;
+      animation: surface 3.4s cubic-bezier(.4,.0,.2,1) forwards;
+      z-index: 2;
+    }
+    .steam {
+      position: absolute;
+      inset: auto;
+      left: 24px;
+      right: 24px;
+      bottom: 55px;
+      height: 40px;
+      pointer-events: none;
+      opacity: 0.85;
+      filter: blur(.4px);
+      z-index: 3;
+    }
+    .steam span {
+      position: absolute;
+      bottom: 0;
+      width: 10px;
+      height: 26px;
+      background: radial-gradient(circle at 50% 20%, rgba(248,250,252,.9), transparent 60%);
+      opacity: 0;
+      border-radius: 999px;
+      animation: steam 3s ease-in-out infinite;
+    }
+    .steam span:nth-child(1) { left: 0;   animation-delay: .0s; }
+    .steam span:nth-child(2) { left: 50%; transform: translateX(-50%); animation-delay: .6s; }
+    .steam span:nth-child(3) { right: 0;  animation-delay: 1.2s; }
+
+    .mug-handle {
+      position: absolute;
+      right: -18px;
+      top: 14px;
+      width: 28px;
+      height: 36px;
+      border-radius: 999px;
+      border: 4px solid rgba(226,232,240,.95);
       border-left: none;
-      border-radius: 0 12px 12px 0;
+      box-shadow: 0 0 12px rgba(148,163,184,.9);
+      z-index: 0;
+    }
+    .mug-base-shadow {
+      position: absolute;
+      inset: auto 0 -14px;
+      margin-inline: auto;
+      width: 96px;
+      height: 22px;
+      background: radial-gradient(circle at 50% 0%, rgba(15,23,42,.9), transparent 60%);
+      opacity: .6;
+      filter: blur(4px);
     }
     .label {
-      margin-top: 12px;
       font-size: 11px;
-      letter-spacing: .15em;
-      color: #c4b5fd;
+      letter-spacing: .18em;
       text-transform: uppercase;
+      color: #c4b5fd;
+      white-space: nowrap;
+    }
+    .sub-label {
+      font-size: 10px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(148,163,184,.9);
     }
     iframe {
       position: absolute;
@@ -310,20 +561,56 @@
       height: 100%;
       border: none;
     }
+
+    @keyframes fill {
+      0%   { height: 0%;   }
+      20%  { height: 30%;  }
+      45%  { height: 65%;  }
+      70%  { height: 80%;  }
+      100% { height: 86%;  }
+    }
+    @keyframes surface {
+      0%   { opacity: 0; transform: translateY(6px); }
+      45%  { opacity: 0; transform: translateY(6px); }
+      70%  { opacity: 1; transform: translateY(0); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes steam {
+      0%   { opacity: 0; transform: translateY(10px) scale(.8); }
+      30%  { opacity: .9; transform: translateY(-4px) scale(1); }
+      60%  { opacity: .4; transform: translateY(-16px) scale(.95); }
+      100% { opacity: 0; transform: translateY(-26px) scale(.9); }
+    }
   </style>
 </head>
 <body>
-  <div id="l">
-    <div class="mug"></div>
-    <div class="label">Loading Portal using Cafe ☕</div>
+  <div id="loader-wrap">
+    <div class="mug-shell">
+      <div class="coffee-fill"></div>
+      <div class="coffee-surface"></div>
+      <div class="steam">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="mug-handle"></div>
+      <div class="mug-base-shadow"></div>
+    </div>
+    <div class="label">Loading portal using cafe</div>
+    <div class="sub-label">brewing connection…</div>
   </div>
   <script>
     const f = document.createElement('iframe');
     f.src = ${JSON.stringify(url)};
     f.onload = () => {
-      const loader = document.getElementById('l');
-      if (loader) loader.style.display = 'none';
+      const wrap = document.getElementById('loader-wrap');
+      if (wrap) wrap.style.display = 'none';
     };
+    setTimeout(() => {
+      // fallback hide in case onload gets blocked
+      const wrap = document.getElementById('loader-wrap');
+      if (wrap) wrap.style.display = 'none';
+    }, 8000);
     document.body.appendChild(f);
   <\/script>
 </body>
@@ -357,8 +644,8 @@
     });
 
     /* cloak */
-    function applyCloak() {
-      document.title = 'Google';
+    function applyCloak(title) {
+      document.title = title || 'Google';
     }
 
     /* magnetic buttons */
@@ -383,7 +670,7 @@
       d.style.left = e.clientX + 'px';
       d.style.top = e.clientY + 'px';
       document.body.appendChild(d);
-      setTimeout(() => d.remove(), 400);
+      setTimeout(() => d.remove(), 450);
     });
   </script>
 </body>
