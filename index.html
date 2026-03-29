@@ -1,234 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>nope</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
-:root{
---p1:#a855f7;
---p2:#7c3aed;
---p3:#c084fc;
---bg:#0a0014;
---glass:rgba(168,85,247,.08);
---border:rgba(168,85,247,.25);
+:root {
+  --purple1: #a855f7;
+  --purple2: #7c3aed;
+  --accent1: #c084fc;
+  --glass: rgba(168, 85, 247, 0.12);
+  --border: rgba(168, 85, 247, 0.35);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui;}
-body{
-height:100vh;
-background:radial-gradient(circle at top,#0a0014,#000);
-color:#f5f3ff;
-overflow:hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui;
 }
 
-/* layout */
-.wrapper{display:flex;align-items:center;justify-content:center;height:100vh;}
-.card{
-width:850px;
-padding:28px;
-border-radius:28px;
-background:
-radial-gradient(circle at 0% 0%,rgba(168,85,247,.35),transparent),
-linear-gradient(145deg,#140028,#2a0050);
-border:1px solid var(--border);
-backdrop-filter:blur(25px);
-box-shadow:0 40px 120px rgba(0,0,0,.8);
+body {
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(circle at top, #0a0014, #000);
+  color: #f9fafb;
 }
 
-/* header */
-h1{
-font-size:2.2rem;
-background:linear-gradient(90deg,#fff,#c4b5fd,#a855f7);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
+/* GLASS BOOST */
+.card {
+  backdrop-filter: blur(40px) saturate(250%);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(168,85,247,0.35), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(192,132,252,0.25), transparent 55%),
+    linear-gradient(145deg, rgba(20,0,40,0.95), rgba(40,0,80,0.85));
+  border: 1px solid var(--border);
+  box-shadow:
+    0 40px 140px rgba(0,0,0,0.9),
+    inset 0 1px 0 rgba(255,255,255,0.25);
 }
-.subtitle{font-size:.7rem;color:#c4b5fd;letter-spacing:.2em}
+
+/* buttons more glossy */
+.btn {
+  background:
+    linear-gradient(135deg, rgba(168,85,247,0.4), rgba(124,58,237,0.6)),
+    linear-gradient(145deg, #1a0033, #3b0764);
+  backdrop-filter: blur(10px);
+}
+
+.btn:hover {
+  box-shadow:
+    0 20px 50px rgba(168,85,247,0.8),
+    0 0 20px rgba(192,132,252,0.6);
+}
 
 /* tabs */
-.tabs{display:flex;gap:8px;margin:18px 0}
-.tab{
-flex:1;
-padding:8px;
-border-radius:999px;
-background:#140028;
-border:1px solid var(--border);
-text-align:center;
-cursor:pointer;
-font-size:.75rem;
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
 }
-.tab.active{
-background:linear-gradient(135deg,var(--p1),var(--p2));
+
+.tab {
+  flex: 1;
+  padding: 9px;
+  border-radius: 999px;
+  background: rgba(20,0,40,0.8);
+  border: 1px solid var(--border);
+  text-align: center;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, var(--purple1), var(--purple2));
 }
 
 /* sections */
-.section{display:none;}
-.section.active{display:block;}
+.section { display: none; }
+.section.active { display: block; }
 
-/* buttons */
-.btn{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:14px;
-border:1px solid var(--border);
-background:linear-gradient(145deg,#1a0033,#3b0764);
-color:#fff;
-cursor:pointer;
-transition:.2s;
+/* input */
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(20,0,40,0.9);
+  color: white;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(168,85,247,.7);}
 
-/* inputs */
-input{
-width:100%;
-padding:10px;
-border-radius:10px;
-border:1px solid var(--border);
-background:#140028;
-color:#fff;
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
 }
-.input-group{display:flex;gap:10px;margin-top:10px}
 
-/* footer */
-.small{margin-top:10px;font-size:.7rem;text-align:right;opacity:.6}
-
-/* trail */
-.trail{
-position:fixed;width:6px;height:6px;border-radius:50%;
-background:#c084fc;pointer-events:none;
-animation:f .4s forwards;
+.small {
+  margin-top: 14px;
+  font-size: 0.7rem;
+  text-align: right;
+  opacity: 0.7;
 }
-@keyframes f{to{opacity:0;transform:scale(.3)}}
 </style>
 </head>
 
 <body>
 
 <div class="wrapper">
-<div class="card">
+  <div class="card">
+    <div class="header-panel">
+      <h1>nope</h1>
+      <div class="subtitle">Pr0xy launcher</div>
+    </div>
 
-<h1>nope</h1>
-<div class="subtitle">Pr0xy launcher</div>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('home', this)">Home</div>
+      <div class="tab" onclick="switchTab('settings', this)">Settings</div>
+    </div>
 
-<div class="tabs">
-<div class="tab active" onclick="tab('home',this)">Home</div>
-<div class="tab" onclick="tab('settings',this)">Settings</div>
-</div>
+    <!-- HOME -->
+    <div id="home" class="section active">
+      <button class="btn" onclick="openBlank('https://truffled.onrender.com')">Truffled</button>
+      <button class="btn" onclick="openBlank('https://sdxp.onrender.com')">SDXP</button>
+      <button class="btn" onclick="openBlank('https://fern.onrender.com')">Fern</button>
+    </div>
 
-<!-- HOME -->
-<div id="home" class="section active">
-<button class="btn" onclick="openBlank('https://truffled.onrender.com')">Truffled</button>
-<button class="btn" onclick="openBlank('https://sdxp.onrender.com')">SDXP</button>
-<button class="btn" onclick="openBlank('https://fern.onrender.com')">Fern</button>
-</div>
+    <!-- SETTINGS -->
+    <div id="settings" class="section">
 
-<!-- SETTINGS -->
-<div id="settings" class="section">
+      <!-- URL OPENER -->
+      <div class="input-group">
+        <input id="url" placeholder="https://example.com" />
+        <button class="btn" onclick="openCustom()">Open</button>
+      </div>
 
-<input id="url" placeholder="Enter URL to open in about:blank">
-<button class="btn" onclick="openCustom()">Open in about:blank</button>
+      <!-- PANIC -->
+      <input id="panicUrl" placeholder="Panic URL" style="margin-top:10px"/>
+      <button class="btn" style="margin-top:10px" onclick="savePanic()">Save Panic</button>
 
-<br><br>
+      <!-- CLOAK -->
+      <button class="btn" style="margin-top:10px" onclick="applyCloak()">Apply Cloak</button>
 
-<input id="panicUrl" placeholder="Set panic redirect URL">
-<button class="btn" onclick="savePanic()">Save Panic</button>
+      <div class="small">panic key: <b>`</b></div>
+    </div>
 
-<br><br>
-
-<button class="btn" onclick="cloak()">Apply Cloak (Google)</button>
-
-<div class="small">panic key: <b>`</b></div>
-
-</div>
-
-<div class="small">made by nope</div>
-
-</div>
-</div>
-
-<script>
-/* tabs */
-function tab(id,el){
-document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-el.classList.add('active');
-document.getElementById(id).classList.add('active');
-}
-
-/* ☕ about:blank loader */
-function openBlank(url){
-const w=window.open('about:blank','_blank');
-if(!w)return;
-
-w.document.write(`
-<!DOCTYPE html>
-<html>
-<body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0014;color:white;font-family:sans-serif;">
-
-<div id="l">
-<div style="width:90px;height:70px;background:linear-gradient(#a855f7,#7c3aed);border-radius:0 0 20px 20px;position:relative;box-shadow:0 0 30px rgba(168,85,247,.6)">
-</div>
-
-<div style="position:absolute;margin-top:110px;font-size:11px;letter-spacing:.15em;color:#c4b5fd">
-Loading Portal using Cafe ☕
-</div>
+    <div class="small">made by nope</div>
+  </div>
 </div>
 
 <script>
-const f=document.createElement('iframe');
-f.src="${url}";
-f.style="position:absolute;inset:0;width:100%;height:100%;border:none;";
-f.onload=()=>document.getElementById('l').style.display='none';
-document.body.appendChild(f);
-<\/script>
-
-</body>
-</html>
-`);
+function switchTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById(id).classList.add('active');
 }
 
-/* custom url */
-function openCustom(){
-let url=document.getElementById('url').value.trim();
-if(!url)return;
-if(!/^https?:\\/\\//i.test(url))url='https://'+url;
-openBlank(url);
+/* loader (same but text changed) */
+function openBlank(url) {
+  const w = window.open('about:blank', '_blank');
+  if (!w) return;
+
+  w.document.write(`
+  <body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0014;color:white;font-family:sans-serif;">
+    <div id="l">
+      <div style="width:90px;height:70px;background:linear-gradient(#a855f7,#7c3aed);border-radius:0 0 20px 20px;"></div>
+      <div style="margin-top:10px;font-size:11px;letter-spacing:.15em;color:#c4b5fd">
+        Loading Portal using Cafe ☕
+      </div>
+    </div>
+    <script>
+      const f=document.createElement('iframe');
+      f.src="${url}";
+      f.style="position:absolute;inset:0;width:100%;height:100%;border:none;";
+      f.onload=()=>document.getElementById('l').style.display='none';
+      document.body.appendChild(f);
+    <\/script>
+  </body>`);
+}
+
+function openCustom() {
+  let url = document.getElementById('url').value.trim();
+  if (!url) return;
+  if (!/^https?:\\/\\//i.test(url)) url = 'https://' + url;
+  openBlank(url);
 }
 
 /* panic */
-let panic=localStorage.getItem('panic')||'https://google.com';
-function savePanic(){
-const v=document.getElementById('panicUrl').value.trim();
-if(v){panic=v;localStorage.setItem('panic',panic);}
+let panic = localStorage.getItem('panic') || 'https://google.com';
+function savePanic() {
+  const val = document.getElementById('panicUrl').value.trim();
+  if (val) {
+    panic = val;
+    localStorage.setItem('panic', panic);
+  }
 }
-
-document.addEventListener('keydown',e=>{
-if(e.key==='`')location.href=panic;
+document.addEventListener('keydown', (e) => {
+  if (e.key === '`') location.href = panic;
 });
 
 /* cloak */
-function cloak(){
-document.title='Google';
-let link=document.querySelector("link[rel='icon']");
-if(!link){
-link=document.createElement('link');
-link.rel='icon';
-document.head.appendChild(link);
+function applyCloak() {
+  document.title = 'Google';
 }
-link.href='https://www.google.com/favicon.ico';
-}
-
-/* cursor trail */
-document.addEventListener('mousemove',e=>{
-const d=document.createElement('div');
-d.className='trail';
-d.style.left=e.clientX+'px';
-d.style.top=e.clientY+'px';
-document.body.appendChild(d);
-setTimeout(()=>d.remove(),400);
-});
 </script>
 
 </body>
