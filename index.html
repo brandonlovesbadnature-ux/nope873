@@ -4,20 +4,18 @@
   <meta charset="UTF-8" />
   <title>nope</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <style>
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
 
-#particles {
-  position: fixed;
-  inset: 0;
-  z-index: 1; 
-  pointer-events: none;
-}
-    
     :root {
-      --p1:#a855f7;
-      --p2:#7c3aed;
-      --p3:#c084fc;
+      --p1: #a855f7;
+      --p2: #7c3aed;
+      --p3: #c084fc;
     }
 
     * {
@@ -34,24 +32,29 @@
       color: #fff;
     }
 
-    /* animated glow bg */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 20%, rgba(168,85,247,.25), transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(192,132,252,.2), transparent 40%),
-        radial-gradient(circle at 50% 80%, rgba(124,58,237,.25), transparent 40%);
+        radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.25), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(192, 132, 252, 0.2), transparent 40%),
+        radial-gradient(circle at 50% 80%, rgba(124, 58, 237, 0.25), transparent 40%);
       filter: blur(80px);
       animation: move 14s infinite linear;
       z-index: 0;
     }
 
     @keyframes move {
-      0%   { transform: translate(0, 0); }
-      50%  { transform: translate(-60px, 40px); }
-      100% { transform: translate(0, 0); }
+      0% {
+        transform: translate(0, 0);
+      }
+      50% {
+        transform: translate(-60px, 40px);
+      }
+      100% {
+        transform: translate(0, 0);
+      }
     }
 
     .wrapper {
@@ -64,36 +67,39 @@
       padding: 16px;
     }
 
-    /* LIQUID GLASS CARD */
     .card {
       width: min(900px, 100%);
       padding: 28px 26px 22px;
       border-radius: 28px;
       position: relative;
       overflow: hidden;
-
-      background: linear-gradient(145deg, rgba(20,0,40,.7), rgba(40,0,80,.5));
+      background: linear-gradient(145deg, rgba(20, 0, 40, 0.7), rgba(40, 0, 80, 0.5));
       backdrop-filter: blur(40px) saturate(180%);
-      border: 1px solid rgba(255,255,255,.15);
-      box-shadow: 0 40px 140px rgba(0,0,0,.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 40px 140px rgba(0, 0, 0, 0.9);
     }
 
-    /* moving gloss */
     .card::before {
       content: "";
       position: absolute;
       inset: -50%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.18), transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 60%);
       animation: glassMove 10s linear infinite;
       mix-blend-mode: screen;
-      opacity: .75;
+      opacity: 0.75;
       pointer-events: none;
     }
 
     @keyframes glassMove {
-      0%   { transform: translate(-18%, -18%); }
-      50%  { transform: translate(18%, 18%); }
-      100% { transform: translate(-18%, -18%); }
+      0% {
+        transform: translate(-18%, -18%);
+      }
+      50% {
+        transform: translate(18%, 18%);
+      }
+      100% {
+        transform: translate(-18%, -18%);
+      }
     }
 
     header {
@@ -109,24 +115,23 @@
       background: linear-gradient(90deg, #fff, #c4b5fd, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      letter-spacing: .03em;
+      letter-spacing: 0.03em;
     }
 
     .subtitle {
-      font-size: .7rem;
+      font-size: 0.7rem;
       color: #c4b5fd;
-      letter-spacing: .2em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
     }
 
-    /* tabs */
     .tabs {
       display: inline-flex;
       gap: 6px;
       padding: 4px;
       border-radius: 999px;
-      background: rgba(8,0,20,.85);
-      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(8, 0, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .tab {
@@ -135,33 +140,36 @@
       background: transparent;
       border: none;
       cursor: pointer;
-      font-size: .78rem;
+      font-size: 0.78rem;
       color: #a5b4fc;
-      letter-spacing: .08em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      transition: .2s;
+      transition: 0.2s;
       white-space: nowrap;
     }
 
     .tab.active {
       background: linear-gradient(135deg, var(--p1), var(--p2));
       color: #f9fafb;
-      box-shadow: 0 0 20px rgba(168,85,247,.6);
+      box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
     }
 
     main {
       margin-top: 16px;
     }
 
-    /* sections */
-    .section { display: none; }
-    .section.active { display: block; }
+    .section {
+      display: none;
+    }
 
-    /* prox grid */
+    .section.active {
+      display: block;
+    }
+
     .grid-title {
-      font-size: .75rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: .14em;
+      letter-spacing: 0.14em;
       color: #9ca3af;
       margin-bottom: 10px;
     }
@@ -176,25 +184,26 @@
       width: 100%;
       padding: 11px 12px;
       border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.09);
-      background: radial-gradient(circle at top left, rgba(192,132,252,.35), transparent 50%),
-                  linear-gradient(145deg, #1a0033, #3b0764);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background:
+        radial-gradient(circle at top left, rgba(192, 132, 252, 0.35), transparent 50%),
+        linear-gradient(145deg, #1a0033, #3b0764);
       color: white;
       cursor: pointer;
       position: relative;
       overflow: hidden;
-      transition: transform .18s ease, box-shadow .24s ease, border-color .2s;
+      transition: transform 0.18s ease, box-shadow 0.24s ease, border-color 0.2s;
       text-align: left;
     }
 
     .btn-label {
-      font-size: .88rem;
+      font-size: 0.88rem;
       font-weight: 500;
     }
 
     .btn-sub {
-      font-size: .68rem;
-      opacity: .65;
+      font-size: 0.68rem;
+      opacity: 0.65;
       margin-top: 2px;
     }
 
@@ -202,26 +211,27 @@
       content: "";
       position: absolute;
       inset: -30%;
-      background: radial-gradient(circle at var(--x,50%) var(--y,50%), rgba(255,255,255,.22), transparent 58%);
+      background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.22), transparent 58%);
       opacity: 0;
-      transition: opacity .2s;
+      transition: opacity 0.2s;
       pointer-events: none;
       mix-blend-mode: screen;
     }
 
-    .btn:hover::before { opacity: 1; }
+    .btn:hover::before {
+      opacity: 1;
+    }
 
     .btn:hover {
-      box-shadow: 0 20px 60px rgba(168,85,247,.7);
-      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 20px 60px rgba(168, 85, 247, 0.7);
+      border-color: rgba(255, 255, 255, 0.18);
     }
 
     .btn:active {
-      transform: translateY(1px) scale(.99);
-      box-shadow: 0 10px 30px rgba(15,23,42,.9);
+      transform: translateY(1px) scale(0.99);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.9);
     }
 
-    /* settings layout */
     .settings-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
@@ -233,6 +243,7 @@
       .settings-grid {
         grid-template-columns: minmax(0, 1fr);
       }
+
       header {
         flex-direction: column;
         align-items: flex-start;
@@ -240,8 +251,8 @@
     }
 
     .block-label {
-      font-size: .72rem;
-      letter-spacing: .13em;
+      font-size: 0.72rem;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
       color: #9ca3af;
       margin-bottom: 6px;
@@ -257,22 +268,22 @@
       width: 100%;
       padding: 10px 11px;
       border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(11,0,26,.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(11, 0, 26, 0.9);
       color: white;
-      font-size: .8rem;
+      font-size: 0.8rem;
       outline: none;
-      transition: border-color .18s, box-shadow .18s, background .18s;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
     }
 
     input::placeholder {
-      color: rgba(148,163,184,.9);
+      color: rgba(148, 163, 184, 0.9);
     }
 
     input:focus {
-      border-color: rgba(192,132,252,.9);
-      box-shadow: 0 0 0 1px rgba(192,132,252,.7);
-      background: rgba(15,6,35,.98);
+      border-color: rgba(192, 132, 252, 0.9);
+      box-shadow: 0 0 0 1px rgba(192, 132, 252, 0.7);
+      background: rgba(15, 6, 35, 0.98);
     }
 
     .settings-actions {
@@ -282,20 +293,19 @@
     }
 
     .hint {
-      font-size: .7rem;
-      opacity: .7;
+      font-size: 0.7rem;
+      opacity: 0.7;
       text-align: right;
       margin-top: 4px;
     }
 
     footer {
       margin-top: 12px;
-      font-size: .7rem;
-      opacity: .7;
+      font-size: 0.7rem;
+      opacity: 0.7;
       text-align: right;
     }
 
-    /* cursor trail */
     .trail {
       position: fixed;
       width: 6px;
@@ -303,20 +313,27 @@
       border-radius: 50%;
       background: #c084fc;
       pointer-events: none;
-      animation: f .45s forwards;
-      filter: blur(.5px);
+      animation: fadeTrail 0.45s forwards;
+      filter: blur(0.5px);
       mix-blend-mode: screen;
       z-index: 9999;
     }
 
-    @keyframes f {
-      0%   { opacity: .9; transform: scale(1); }
-      100% { opacity: 0;  transform: scale(.3) translateY(4px); }
+    @keyframes fadeTrail {
+      0% {
+        opacity: 0.9;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.3) translateY(4px);
+      }
     }
   </style>
 </head>
-
 <body>
+  <canvas id="particles"></canvas>
+
   <div class="wrapper">
     <div class="card">
       <header>
@@ -325,101 +342,103 @@
           <div class="subtitle">Pr0xy launcher</div>
         </div>
         <div class="tabs">
-          <button class="tab active" onclick="switchTab('home', this)">Home</button>
-          <button class="tab" onclick="switchTab('settings', this)">Settings</button>
+          <button class="tab active" type="button" onclick="switchTab('home', this)">Home</button>
+          <button class="tab" type="button" onclick="switchTab('settings', this)">Settings</button>
         </div>
       </header>
 
       <main>
-        <!-- HOME -->
         <section id="home" class="section active">
           <div class="grid-title">quick portals</div>
           <div class="proxy-grid">
-            <button class="btn" data-magnetic onclick="openBlank('https://menu.burgermap.org/')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://menu.burgermap.org/')">
               <div class="btn-label">Truffled</div>
-              <div class="btn-sub">Clean UI • Fast</div>
+              <div class="btn-sub">Clean UI - Fast</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('http://panel.clever.com.13h.tw/')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('http://panel.clever.com.13h.tw/')">
               <div class="btn-label">SDXP</div>
-              <div class="btn-sub">Minimal • Stable</div>
+              <div class="btn-sub">Minimal - Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://storage.googleapis.com/fernisbest/index.html')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://storage.googleapis.com/fernisbest/index.html')">
               <div class="btn-label">Fern</div>
-              <div class="btn-sub">Minimal • Stable</div>
+              <div class="btn-sub">Minimal - Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://sciencerules.cfd/')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://sciencerules.cfd/')">
               <div class="btn-label">Everest</div>
-              <div class="btn-sub">Minimal • Stable</div>
+              <div class="btn-sub">Minimal - Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://exemptpaint.space/index?cache=641464898')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://exemptpaint.space/index?cache=641464898')">
               <div class="btn-label">Holy</div>
-              <div class="btn-sub">Fast • Stable</div>
+              <div class="btn-sub">Fast - Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://deeplearning-1fav.onrender.com')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://deeplearning-1fav.onrender.com')">
               <div class="btn-label">cafe</div>
-              <div class="btn-sub">goated|mine</div>
+              <div class="btn-sub">goated | mine</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://cosmicunblocker.onrender.com/')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://cosmicunblocker.onrender.com/')">
               <div class="btn-label">Cosmic Hub</div>
               <div class="btn-sub">goat</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://betherethe.sametimetomorrow.net/')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://betherethe.sametimetomorrow.net/')">
               <div class="btn-label">Overcloaked</div>
-              <div class="btn-sub">Fast • Good</div>
+              <div class="btn-sub">Fast - Good</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://algebra.rest')">
+            <button class="btn" type="button" data-magnetic onclick="openBlank('https://algebra.rest')">
               <div class="btn-label">Nebula</div>
               <div class="btn-sub">Game / app hub</div>
             </button>
           </div>
         </section>
 
-        <!-- SETTINGS -->
         <section id="settings" class="section">
           <div class="settings-grid">
             <div>
               <div class="block-label">custom url</div>
               <div class="input-group">
-                <input id="url" placeholder="https://example.com">
-                <button class="btn" data-magnetic onclick="openCustom()">
+                <input id="url" placeholder="https://example.com" />
+                <button class="btn" type="button" data-magnetic onclick="openCustom()">
                   <div class="btn-label">Open</div>
                 </button>
               </div>
 
-              <div style="margin-top:14px;">
+              <div style="margin-top: 14px;">
                 <div class="block-label">panic url</div>
                 <div class="input-group">
-                  <input id="panicUrl" placeholder="https://google.com">
-                  <button class="btn" data-magnetic onclick="savePanic()">
+                  <input id="panicUrl" placeholder="https://google.com" />
+                  <button class="btn" type="button" data-magnetic onclick="savePanic()">
                     <div class="btn-label">Save</div>
                   </button>
                 </div>
-                <div class="hint">panic key: <b>`</b> (backtick)</div>
+                <div class="hint" id="panicHint">panic key: <b>`</b></div>
               </div>
             </div>
 
             <div>
               <div class="block-label">cloak</div>
               <div class="settings-actions">
-                <button class="btn" data-magnetic onclick="applyCloak('Google')">
+                <button class="btn" type="button" data-magnetic onclick="applyCloakByName('Google')">
                   <div class="btn-label">Google tab</div>
-                  <div class="btn-sub">Title: Google • Safe</div>
+                  <div class="btn-sub">Title: Google - Safe</div>
                 </button>
-                <button class="btn" data-magnetic onclick="applyCloak('Classroom')">
+                <button class="btn" type="button" data-magnetic onclick="applyCloakByName('Classroom')">
                   <div class="btn-label">Classroom tab</div>
                   <div class="btn-sub">Title: Classroom</div>
                 </button>
-                <button class="btn" data-magnetic onclick="applyCloak('Docs – Untitled document')">
+                <button class="btn" type="button" data-magnetic onclick="applyCloakByName('Docs')">
                   <div class="btn-label">Docs tab</div>
                   <div class="btn-sub">Title: Docs</div>
+                </button>
+                <button class="btn" type="button" data-magnetic onclick="removeCloak()">
+                  <div class="btn-label">Reset cloak</div>
+                  <div class="btn-sub">Back to nope</div>
                 </button>
               </div>
             </div>
@@ -432,20 +451,43 @@
   </div>
 
   <script>
+    const PANIC_KEY_STORAGE = "panicKey";
+    const PANIC_URL_STORAGE = "panicUrl";
+    const CLOAK_STORAGE = "selectedCloak";
+    const ORIGINAL_TITLE = document.title;
+
+    const cloaks = {
+      Google: {
+        name: "Google",
+        title: "Google",
+        icon: "https://www.google.com/favicon.ico"
+      },
+      Classroom: {
+        name: "Classroom",
+        title: "Google Classroom",
+        icon: "https://ssl.gstatic.com/classroom/favicon.png"
+      },
+      Docs: {
+        name: "Docs",
+        title: "Docs - Untitled document",
+        icon: "https://ssl.gstatic.com/docs/doclist/images/mediatype/icon_1_document_x16.png"
+      }
+    };
+
     function switchTab(id, el) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById(id).classList.add('active');
+      document.querySelectorAll(".tab").forEach((tab) => tab.classList.remove("active"));
+      document.querySelectorAll(".section").forEach((section) => section.classList.remove("active"));
+      el.classList.add("active");
+      document.getElementById(id).classList.add("active");
     }
 
-    /* coffe loader */
     function openBlank(url) {
-      const w = window.open('about:blank', '_blank');
-      if (!w) return;
+      const w = window.open("about:blank", "_blank");
+      if (!w) {
+        return;
+      }
 
-      const loaderHTML = `
-<!DOCTYPE html>
+      const loaderHTML = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -514,7 +556,7 @@
       bottom: 55px;
       height: 40px;
       pointer-events: none;
-      opacity: 0.85;
+      opacity: .85;
       filter: blur(.4px);
       z-index: 3;
     }
@@ -528,10 +570,9 @@
       border-radius: 999px;
       animation: steam 3s ease-in-out infinite;
     }
-    .steam span:nth-child(1) { left: 0;   animation-delay: .0s; }
+    .steam span:nth-child(1) { left: 0; animation-delay: 0s; }
     .steam span:nth-child(2) { left: 50%; transform: translateX(-50%); animation-delay: .6s; }
-    .steam span:nth-child(3) { right: 0;  animation-delay: 1.2s; }
-
+    .steam span:nth-child(3) { right: 0; animation-delay: 1.2s; }
     .mug-handle {
       position: absolute;
       right: -18px;
@@ -574,24 +615,23 @@
       height: 100%;
       border: none;
     }
-
     @keyframes fill {
-      0%   { height: 0%;   }
-      20%  { height: 30%;  }
-      45%  { height: 65%;  }
-      70%  { height: 80%;  }
-      100% { height: 86%;  }
+      0% { height: 0%; }
+      20% { height: 30%; }
+      45% { height: 65%; }
+      70% { height: 80%; }
+      100% { height: 86%; }
     }
     @keyframes surface {
-      0%   { opacity: 0; transform: translateY(6px); }
-      45%  { opacity: 0; transform: translateY(6px); }
-      70%  { opacity: 1; transform: translateY(0); }
+      0% { opacity: 0; transform: translateY(6px); }
+      45% { opacity: 0; transform: translateY(6px); }
+      70% { opacity: 1; transform: translateY(0); }
       100% { opacity: 1; transform: translateY(0); }
     }
     @keyframes steam {
-      0%   { opacity: 0; transform: translateY(10px) scale(.8); }
-      30%  { opacity: .9; transform: translateY(-4px) scale(1); }
-      60%  { opacity: .4; transform: translateY(-16px) scale(.95); }
+      0% { opacity: 0; transform: translateY(10px) scale(.8); }
+      30% { opacity: .9; transform: translateY(-4px) scale(1); }
+      60% { opacity: .4; transform: translateY(-16px) scale(.95); }
       100% { opacity: 0; transform: translateY(-26px) scale(.9); }
     }
   </style>
@@ -610,19 +650,18 @@
       <div class="mug-base-shadow"></div>
     </div>
     <div class="label">Loading portal using cafe</div>
-    <div class="sub-label">brewing connection…</div>
+    <div class="sub-label">brewing connection...</div>
   </div>
   <script>
-    const f = document.createElement('iframe');
+    const f = document.createElement("iframe");
     f.src = ${JSON.stringify(url)};
     f.onload = () => {
-      const wrap = document.getElementById('loader-wrap');
-      if (wrap) wrap.style.display = 'none';
+      const wrap = document.getElementById("loader-wrap");
+      if (wrap) wrap.style.display = "none";
     };
     setTimeout(() => {
-      // fallback hide in case onload gets blocked
-      const wrap = document.getElementById('loader-wrap');
-      if (wrap) wrap.style.display = 'none';
+      const wrap = document.getElementById("loader-wrap");
+      if (wrap) wrap.style.display = "none";
     }, 8000);
     document.body.appendChild(f);
   <\/script>
@@ -635,119 +674,219 @@
     }
 
     function openCustom() {
-      let url = document.getElementById('url').value.trim();
-      if (!url) return;
-      if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+      const input = document.getElementById("url");
+      let url = input.value.trim();
+      if (!url) {
+        return;
+      }
+
+      if (!/^https?:\/\//i.test(url)) {
+        url = "https://" + url;
+      }
+
       openBlank(url);
     }
 
-    /* panic */
-    let panic = localStorage.getItem('panic') || 'https://google.com';
+    function safeGet(id) {
+      return document.getElementById(id) || null;
+    }
 
-    function savePanic() {
-      const v = document.getElementById('panicUrl').value.trim();
-      if (v) {
-        panic = v;
-        localStorage.setItem('panic', panic);
+    function normalizeUrl(value, fallback) {
+      const trimmed = (value || "").trim();
+      if (!trimmed) {
+        return fallback;
+      }
+
+      if (/^https?:\/\//i.test(trimmed)) {
+        return trimmed;
+      }
+
+      return "https://" + trimmed;
+    }
+
+    function displayCurrentPanicState() {
+      const panicUrlInput = safeGet("panicUrl");
+      const panicHint = safeGet("panicHint");
+      const panicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "`";
+      const panicUrl = localStorage.getItem(PANIC_URL_STORAGE) || "https://www.google.com";
+
+      if (panicUrlInput) {
+        panicUrlInput.value = panicUrl;
+      }
+
+      if (panicHint) {
+        panicHint.innerHTML = "panic key: <b>" + panicKey + "</b> -> " + panicUrl;
       }
     }
 
-    document.addEventListener('keydown', e => {
-      if (e.key === '`') location.href = panic;
-    });
+    function savePanic() {
+      const input = safeGet("panicUrl");
+      if (!input) {
+        return;
+      }
 
-    /* cloak */
-    function applyCloak(title) {
-      document.title = title || 'Google';
+      const nextUrl = normalizeUrl(input.value, "https://www.google.com");
+      localStorage.setItem(PANIC_URL_STORAGE, nextUrl);
+      displayCurrentPanicState();
     }
 
-    /* magnetic buttons */
-    document.querySelectorAll('[data-magnetic]').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = e.clientX - r.left;
-        const y = e.clientY - r.top;
-        btn.style.setProperty('--x', x + 'px');
-        btn.style.setProperty('--y', y + 'px');
-        btn.style.transform = `translate(${(x - r.width / 2) / 10}px, ${(y - r.height / 2) / 10}px)`;
+    function handlePanicKey(event) {
+      const activeTag = document.activeElement ? document.activeElement.tagName : "";
+      const isTyping = activeTag === "INPUT" || activeTag === "TEXTAREA";
+      if (isTyping) {
+        return;
+      }
+
+      const panicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "`";
+      const panicUrl = localStorage.getItem(PANIC_URL_STORAGE) || "https://www.google.com";
+
+      if (event.key === panicKey) {
+        event.preventDefault();
+        window.location.assign(panicUrl);
+      }
+    }
+
+    function ensureFavicon() {
+      let link = document.querySelector("link[rel='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.rel = "icon";
+        document.head.appendChild(link);
+      }
+      return link;
+    }
+
+    function applyCloak(cloak) {
+      if (!cloak) {
+        removeCloak();
+        return;
+      }
+
+      document.title = cloak.title;
+      ensureFavicon().href = cloak.icon;
+      localStorage.setItem(CLOAK_STORAGE, JSON.stringify(cloak));
+    }
+
+    function applyCloakByName(name) {
+      applyCloak(cloaks[name]);
+    }
+
+    function removeCloak() {
+      document.title = ORIGINAL_TITLE;
+      const favicon = ensureFavicon();
+      favicon.href = "data:,";
+      localStorage.removeItem(CLOAK_STORAGE);
+    }
+
+    function restoreSavedCloak() {
+      const saved = localStorage.getItem(CLOAK_STORAGE);
+      if (!saved) {
+        return;
+      }
+
+      try {
+        const cloak = JSON.parse(saved);
+        applyCloak(cloak);
+      } catch (error) {
+        localStorage.removeItem(CLOAK_STORAGE);
+      }
+    }
+
+    document.querySelectorAll("[data-magnetic]").forEach((btn) => {
+      btn.addEventListener("mousemove", (event) => {
+        const rect = btn.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        btn.style.setProperty("--x", x + "px");
+        btn.style.setProperty("--y", y + "px");
+        btn.style.transform = `translate(${(x - rect.width / 2) / 10}px, ${(y - rect.height / 2) / 10}px)`;
       });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0,0)';
+
+      btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "translate(0, 0)";
       });
     });
 
-    /* trail */
-    document.addEventListener('mousemove', e => {
-      const d = document.createElement('div');
-      d.className = 'trail';
-      d.style.left = e.clientX + 'px';
-      d.style.top = e.clientY + 'px';
-      document.body.appendChild(d);
-      setTimeout(() => d.remove(), 450);
+    document.addEventListener("mousemove", (event) => {
+      const dot = document.createElement("div");
+      dot.className = "trail";
+      dot.style.left = event.clientX + "px";
+      dot.style.top = event.clientY + "px";
+      document.body.appendChild(dot);
+      setTimeout(() => dot.remove(), 450);
     });
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
 
-let particles = [];
+    const canvas = document.getElementById("particles");
+    const ctx = canvas ? canvas.getContext("2d") : null;
+    const particles = [];
 
-function resize() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
+    function resize() {
+      if (!canvas) {
+        return;
+      }
 
-class Particle {
-  constructor() {
-    this.reset();
-  }
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = canvas.height + Math.random() * 100;
-    this.size = Math.random() * 2.5 + 0.5;
-    this.speedY = Math.random() * 0.6 + 0.2;
-    this.speedX = (Math.random() - 0.5) * 0.3;
-    this.opacity = Math.random() * 0.6 + 0.2;
-  }
+    class Particle {
+      constructor() {
+        this.reset();
+      }
 
-  update() {
-    this.y -= this.speedY;
-    this.x += this.speedX;
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height + Math.random() * 100;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedY = Math.random() * 0.6 + 0.2;
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.6 + 0.2;
+      }
 
-    if (this.y < -10) this.reset();
-  }
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
 
-  draw() {
-    ctx.beginPath();
-    ctx.fillStyle = `rgba(168,85,247,${this.opacity})`; // purple
-    ctx.shadowBlur = 12;
-    ctx.shadowColor = "#a855f7";
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
+        if (this.y < -10) {
+          this.reset();
+        }
+      }
 
-// create particles
-for (let i = 0; i < 120; i++) {
-  particles.push(new Particle());
-}
+      draw() {
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(168, 85, 247, ${this.opacity})`;
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = "#a855f7";
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    function animate() {
+      if (!ctx || !canvas) {
+        return;
+      }
 
-  particles.forEach(p => {
-    p.update();
-    p.draw();
-  });
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((particle) => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
 
-  requestAnimationFrame(animate);
-}
+    if (canvas && ctx) {
+      resize();
+      window.addEventListener("resize", resize);
+      for (let i = 0; i < 120; i += 1) {
+        particles.push(new Particle());
+      }
+      animate();
+    }
 
-animate();
-    
+    window.addEventListener("keydown", handlePanicKey);
+    restoreSavedCloak();
+    displayCurrentPanicState();
   </script>
-  <script src="app.js"></script>
 </body>
-  <canvas id="particles"></canvas>
 </html>
