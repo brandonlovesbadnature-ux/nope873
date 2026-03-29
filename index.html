@@ -6,6 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 1; 
+  pointer-events: none;
+}
+    
     :root {
       --p1:#a855f7;
       --p2:#7c3aed;
@@ -327,44 +335,44 @@
         <section id="home" class="section active">
           <div class="grid-title">quick portals</div>
           <div class="proxy-grid">
-            <button class="btn" data-magnetic onclick="openBlank('https://truffled.onrender.com')">
+            <button class="btn" data-magnetic onclick="openBlank('https://cafe.blooket.com/gs/MjA1LjIwOS4xMjUuMTA2OjMwMDA=/')">
               <div class="btn-label">Truffled</div>
               <div class="btn-sub">Clean UI • Fast</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://sdxp.onrender.com')">
+            <button class="btn" data-magnetic onclick="openBlank('http://music.english.seminar.project.teacher.alojamientovalleverde.cl')">
               <div class="btn-label">SDXP</div>
               <div class="btn-sub">Minimal • Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://fern.onrender.com')">
+            <button class="btn" data-magnetic onclick="openBlank('https://storage.googleapis.com/fernisbest/index.html')">
               <div class="btn-label">Fern</div>
-              <div class="btn-sub">Alt route</div>
+              <div class="btn-sub">Minimal • Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://ultraviolet-node.onrender.com')">
-              <div class="btn-label">Ultraviolet</div>
-              <div class="btn-sub">Ultraviolet stack</div>
+            <button class="btn" data-magnetic onclick="openBlank('https://sciencerules.cfd/')">
+              <div class="btn-label">Everest</div>
+              <div class="btn-sub">Minimal • Stable</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://holy-unblocker.onrender.com')">
+            <button class="btn" data-magnetic onclick="openBlank('https://exemptpaint.space/')">
               <div class="btn-label">Holy</div>
-              <div class="btn-sub">Multi-proxy hub</div>
+              <div class="btn-sub">Fast • Stable</div>
             </button>
 
             <button class="btn" data-magnetic onclick="openBlank('https://interstellar.onrender.com')">
-              <div class="btn-label">Interstellar</div>
+              <div class="btn-label">SDXP</div>
               <div class="btn-sub">Game / app hub</div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://rammerhead.onrender.com')">
-              <div class="btn-label">Rammerhead</div>
-              <div class="btn-sub">Full browser style</div>
+            <button class="btn" data-magnetic onclick="openBlank('https://betherethe.sametimetomorrow.net/')">
+              <div class="btn-label">Overcloaked</div>
+              <div class="btn-sub"></div>
             </button>
 
-            <button class="btn" data-magnetic onclick="openBlank('https://nebulaproxy.onrender.com')">
+            <button class="btn" data-magnetic onclick="openBlank('Algebra.rest')">
               <div class="btn-label">Nebula</div>
-              <div class="btn-sub">Experimental</div>
+              <div class="btn-sub">Game / app hub</div>
             </button>
           </div>
         </section>
@@ -672,7 +680,69 @@
       document.body.appendChild(d);
       setTimeout(() => d.remove(), 450);
     });
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height + Math.random() * 100;
+    this.size = Math.random() * 2.5 + 0.5;
+    this.speedY = Math.random() * 0.6 + 0.2;
+    this.speedX = (Math.random() - 0.5) * 0.3;
+    this.opacity = Math.random() * 0.6 + 0.2;
+  }
+
+  update() {
+    this.y -= this.speedY;
+    this.x += this.speedX;
+
+    if (this.y < -10) this.reset();
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(168,85,247,${this.opacity})`; // purple
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = "#a855f7";
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+// create particles
+for (let i = 0; i < 120; i++) {
+  particles.push(new Particle());
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+    
   </script>
   <script src="app.js"></script>
 </body>
+  <canvas id="particles"></canvas>
 </html>
