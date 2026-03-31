@@ -1,5 +1,6 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>nope</title>
@@ -275,6 +276,7 @@
     /* Migrated trail to performant canvas rendering */
   </style>
 </head>
+
 <body>
   <canvas id="particles"></canvas>
 
@@ -305,7 +307,8 @@
               <div class="btn-sub">Minimal - Stable</div>
             </button>
 
-            <button class="btn" type="button" data-magnetic onclick="openBlank('https://storage.googleapis.com/fernisbest/index.html')">
+            <button class="btn" type="button" data-magnetic
+              onclick="openBlank('https://storage.googleapis.com/fernisbest/index.html')">
               <div class="btn-label">Fern</div>
               <div class="btn-sub">Minimal - Stable</div>
             </button>
@@ -315,22 +318,26 @@
               <div class="btn-sub">Minimal - Stable</div>
             </button>
 
-            <button class="btn" type="button" data-magnetic onclick="openBlank('https://exemptpaint.space/index?cache=641464898')">
+            <button class="btn" type="button" data-magnetic
+              onclick="openBlank('https://exemptpaint.space/index?cache=641464898')">
               <div class="btn-label">Holy</div>
               <div class="btn-sub">Fast - Stable</div>
             </button>
 
-            <button class="btn" type="button" data-magnetic onclick="openBlank('https://deeplearning-1fav.onrender.com')">
+            <button class="btn" type="button" data-magnetic
+              onclick="openBlank('https://deeplearning-1fav.onrender.com')">
               <div class="btn-label">cafe</div>
               <div class="btn-sub">goated | mine</div>
             </button>
 
-            <button class="btn" type="button" data-magnetic onclick="openBlank('https://cosmicunblocker.onrender.com/')">
+            <button class="btn" type="button" data-magnetic
+              onclick="openBlank('https://cosmicunblocker.onrender.com/')">
               <div class="btn-label">Cosmic Hub</div>
               <div class="btn-sub">goat</div>
             </button>
 
-            <button class="btn" type="button" data-magnetic onclick="openBlank('https://betherethe.sametimetomorrow.net/')">
+            <button class="btn" type="button" data-magnetic
+              onclick="openBlank('https://betherethe.sametimetomorrow.net/')">
               <div class="btn-label">Overcloaked</div>
               <div class="btn-sub">Fast - Good</div>
             </button>
@@ -395,101 +402,6 @@
   </div>
 
   <script>
-
-<script>
-(() => {
-
-    const KILL_SWITCH = false; // set true if you want full lockdown mode
-
-    document.addEventListener("contextmenu", e => e.preventDefault());
-
-    document.addEventListener("keydown", e => {
-        if (
-            e.key === "F12" ||
-            (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) ||
-            (e.ctrlKey && e.key === "U")
-        ) {
-            e.preventDefault();
-        }
-    });
-
-    let triggered = false;
-
-    function detectDevTools() {
-        const w = window.outerWidth - window.innerWidth > 150;
-        const h = window.outerHeight - window.innerHeight > 150;
-
-        return w || h;
-    }
-
-    setInterval(() => {
-        if (detectDevTools()) {
-            if (!triggered) {
-                triggered = true;
-
-                console.clear();
-                console.log("%cNOPE 🔒", "color:#a855f7;font-size:24px");
-
-                if (KILL_SWITCH) {
-                    document.body.innerHTML = `
-                        <div style="
-                            display:flex;
-                            align-items:center;
-                            justify-content:center;
-                            height:100vh;
-                            background:#070710;
-                            color:#a855f7;
-                            font-family:sans-serif;
-                            font-size:26px;
-                        ">
-                            access denied
-                        </div>
-                    `;
-                }
-            }
-        } else {
-            triggered = false;
-        }
-    }, 500);
-
-    setInterval(() => {
-        Function("debugger")();
-    }, 1500);
-
-
-    const noop = () => {};
-    console.log = noop;
-    console.warn = noop;
-    console.error = noop;
-
-    Object.freeze(console);
-
-
-    const protect = obj => {
-        return new Proxy(obj, {
-            get(target, prop) {
-                if (prop === "toString") {
-                    return () => "function () { [native code] }";
-                }
-                return target[prop];
-            }
-        });
-    };
-
-    window.fetch = protect(window.fetch);
-    window.XMLHttpRequest = protect(window.XMLHttpRequest);
-
-    const originalHTML = document.documentElement.innerHTML;
-
-    setInterval(() => {
-        if (!document.documentElement.innerHTML.includes("nopes cool stuf")) {
-            if (KILL_SWITCH) location.reload();
-        }
-    }, 3000);
-
-})();
-</script>
-    
     const PANIC_KEY_STORAGE = "panicKey";
     const PANIC_URL_STORAGE = "panicUrl";
     const CLOAK_STORAGE = "selectedCloak";
@@ -703,6 +615,102 @@
       if (wrap) wrap.style.display = "none";
     }, 8000);
     document.body.appendChild(f);
+
+(() => {
+
+
+
+    const KILL_SWITCH = false; // set true if you want full lockdown mode
+
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    document.addEventListener("keydown", e => {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) ||
+            (e.ctrlKey && e.key === "U")
+        ) {
+            e.preventDefault();
+        }
+    });
+
+    let triggered = false;
+
+    function detectDevTools() {
+        const w = window.outerWidth - window.innerWidth > 150;
+        const h = window.outerHeight - window.innerHeight > 150;
+
+        return w || h;
+    }
+
+    setInterval(() => {
+        if (detectDevTools()) {
+            if (!triggered) {
+                triggered = true;
+
+                console.clear();
+                console.log("%cNOPE 🔒", "color:#a855f7;font-size:24px");
+
+                if (KILL_SWITCH) {
+                    document.body.innerHTML = `
+                        <div style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            height:100vh;
+                            background:#070710;
+                            color:#a855f7;
+                            font-family:sans-serif;
+                            font-size:26px;
+                        ">
+                            access denied
+                        </div>
+                    `;
+                }
+            }
+        } else {
+            triggered = false;
+        }
+    }, 500);
+
+
+    setInterval(() => {
+        Function("debugger")();
+    }, 1500);
+
+
+    const noop = () => {};
+    console.log = noop;
+    console.warn = noop;
+    console.error = noop;
+
+    Object.freeze(console);
+
+    const protect = obj => {
+        return new Proxy(obj, {
+            get(target, prop) {
+                if (prop === "toString") {
+                    return () => "function () { [native code] }";
+                }
+                return target[prop];
+            }
+        });
+    };
+
+    window.fetch = protect(window.fetch);
+    window.XMLHttpRequest = protect(window.XMLHttpRequest);
+
+
+    const originalHTML = document.documentElement.innerHTML;
+
+    setInterval(() => {
+        if (!document.documentElement.innerHTML.includes("nopes cool stuf")) {
+            if (KILL_SWITCH) location.reload();
+        }
+    }, 3000);
+
+})();
+    
   <\/script>
 </body>
 </html>`;
@@ -910,7 +918,7 @@
       draw() {
         const renderSize = this.size * 6;
         ctx.globalAlpha = this.opacity;
-        ctx.drawImage(glowCanvas, this.x - renderSize/2, this.y - renderSize/2, renderSize, renderSize);
+        ctx.drawImage(glowCanvas, this.x - renderSize / 2, this.y - renderSize / 2, renderSize, renderSize);
         ctx.globalAlpha = 1.0;
       }
     }
@@ -922,14 +930,14 @@
         this.life = 1;
         this.size = 3;
       }
-      
+
       update() {
         // fade out roughly in 0.45s at 60fps
         this.life -= 0.035;
         this.y += 0.2;
         this.size *= 0.96;
       }
-      
+
       draw() {
         if (this.life <= 0) return;
         ctx.beginPath();
@@ -945,11 +953,13 @@
       }
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
+
+      // Draw trails
       if (isMouseMoving && mouseX > -100) {
         trails.push(new CanvasTrail(mouseX, mouseY));
       }
-      
+
+      // We process backwards so we can safely remove dead trails
       for (let i = trails.length - 1; i >= 0; i--) {
         trails[i].update();
         trails[i].draw();
@@ -979,4 +989,5 @@
     displayCurrentPanicState();
   </script>
 </body>
+
 </html>
