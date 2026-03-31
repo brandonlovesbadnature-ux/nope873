@@ -395,6 +395,101 @@
   </div>
 
   <script>
+
+<script>
+(() => {
+
+    const KILL_SWITCH = false; // set true if you want full lockdown mode
+
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    document.addEventListener("keydown", e => {
+        if (
+            e.key === "F12" ||
+            (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) ||
+            (e.ctrlKey && e.key === "U")
+        ) {
+            e.preventDefault();
+        }
+    });
+
+    let triggered = false;
+
+    function detectDevTools() {
+        const w = window.outerWidth - window.innerWidth > 150;
+        const h = window.outerHeight - window.innerHeight > 150;
+
+        return w || h;
+    }
+
+    setInterval(() => {
+        if (detectDevTools()) {
+            if (!triggered) {
+                triggered = true;
+
+                console.clear();
+                console.log("%cNOPE 🔒", "color:#a855f7;font-size:24px");
+
+                if (KILL_SWITCH) {
+                    document.body.innerHTML = `
+                        <div style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            height:100vh;
+                            background:#070710;
+                            color:#a855f7;
+                            font-family:sans-serif;
+                            font-size:26px;
+                        ">
+                            access denied
+                        </div>
+                    `;
+                }
+            }
+        } else {
+            triggered = false;
+        }
+    }, 500);
+
+    setInterval(() => {
+        Function("debugger")();
+    }, 1500);
+
+
+    const noop = () => {};
+    console.log = noop;
+    console.warn = noop;
+    console.error = noop;
+
+    Object.freeze(console);
+
+
+    const protect = obj => {
+        return new Proxy(obj, {
+            get(target, prop) {
+                if (prop === "toString") {
+                    return () => "function () { [native code] }";
+                }
+                return target[prop];
+            }
+        });
+    };
+
+    window.fetch = protect(window.fetch);
+    window.XMLHttpRequest = protect(window.XMLHttpRequest);
+
+    const originalHTML = document.documentElement.innerHTML;
+
+    setInterval(() => {
+        if (!document.documentElement.innerHTML.includes("nopes cool stuf")) {
+            if (KILL_SWITCH) location.reload();
+        }
+    }, 3000);
+
+})();
+</script>
+    
     const PANIC_KEY_STORAGE = "panicKey";
     const PANIC_URL_STORAGE = "panicUrl";
     const CLOAK_STORAGE = "selectedCloak";
